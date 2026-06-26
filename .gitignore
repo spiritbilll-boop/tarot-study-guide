@@ -1,0 +1,25 @@
+# ==========================================
+# Tarot Study Guide
+# .gitignore
+# ==========================================
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Backup / editor files
+*.bak
+*.orig
+*~
+*.swp
+
+# IDE settings
+.vscode/
+.idea/
+
+# Temporary development
+foo
+tmp/
