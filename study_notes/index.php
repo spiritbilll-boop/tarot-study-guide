@@ -1,20 +1,12 @@
 <?php
-
 /*
 ============================================================
-
-study_notes/index.php
-
 Study Notes Manager
-
 Controller
-
 ============================================================
 */
-
 require_once(__DIR__ . "/../database.php");
 require_once(__DIR__ . "/common.php");
-
 /*
 ============================================================
 
@@ -22,44 +14,55 @@ Defaults
 
 ============================================================
 */
-
 $message = "";
-
 $card_id =
     isset($_REQUEST['card_id'])
         ? intval($_REQUEST['card_id'])
         : 1;
-
 $orientation =
     isset($_REQUEST['orientation'])
         ? $_REQUEST['orientation']
         : "U";
-
 /*
 ============================================================
 
-Handle Save
+Edit Mode
 
 ============================================================
 */
 
+$edit_id =
+    isset($_GET['edit'])
+        ? intval($_GET['edit'])
+        : 0;
+
+$edit_note = null;
+
+if ($edit_id > 0)
+{
+    $edit_note =
+        get_study_note(
+            $conn,
+            $edit_id
+        );
+}
+/*
+============================================================
+Handle Save
+============================================================
+*/
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
     $title =
         trim($_POST['title']);
-
     $description =
         trim($_POST['description']);
-
     $source =
         trim($_POST['source']);
-
     $notes_text =
         trim($_POST['notes']);
-
     $enabled =
         isset($_POST['enabled']) ? 1 : 0;
-
     if ($title == "")
     {
         $message =
@@ -72,40 +75,58 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     }
     else
     {
-        insert_study_note(
-            $conn,
-            $card_id,
-            $orientation,
-            $title,
-            $description,
-            $source,
-            $notes_text,
-            $enabled
-        );
+        if ($edit_id > 0)
+        {
+            update_study_note(
+                $conn,
+                $edit_id,
+                $title,
+                $description,
+                $source,
+                $notes_text,
+                $enabled
+            );
 
-        $message =
-            "Study Note saved successfully.";
+            $message =
+                "Study Note updated successfully.";
+
+            $edit_note =
+                get_study_note(
+                    $conn,
+                    $edit_id
+                );
+        }
+        else
+        {
+            insert_study_note(
+                $conn,
+                $card_id,
+                $orientation,
+                $title,
+                $description,
+                $source,
+                $notes_text,
+                $enabled
+            );
+
+            $message =
+                "Study Note saved successfully.";
+        }
     }
 }
-
 /*
 ============================================================
-
 Load page data
-
 ============================================================
 */
-
 $cards =
     get_cards($conn);
-
 $notes =
     get_notes(
         $conn,
         $card_id,
         $orientation
     );
-
 $next_sequence =
     get_next_sequence(
         $conn,
@@ -115,9 +136,7 @@ $next_sequence =
 
 /*
 ============================================================
-
 Display page
-
 ============================================================
 */
 
