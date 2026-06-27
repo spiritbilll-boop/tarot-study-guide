@@ -1,19 +1,34 @@
+# Tarot Study Guide CMS
+
+Current Branch
+
+feature/delete-study-notes
+
 Current Version
 
-1.1.3
+0.2.0-dev
+
+Current Status
+
+Working on the Delete feature for Study Notes.
 
 Completed
 
-? Create Study Notes
-? Edit Study Notes
-? Cancel Edit
+* Git and GitHub configured
+* main, develop, and feature branches established
+* Study Notes Create
+* Study Notes Read
+* Study Notes Update
+* Edit Mode
+* Cancel Edit
 
 Next
 
-Delete Study Notes
+* Complete Delete
+* Dashboard
+* Search
 
-Future
+Last Known Good Commit
 
-Dashboard
-Search
-Reorder
+0fa24b8
+
