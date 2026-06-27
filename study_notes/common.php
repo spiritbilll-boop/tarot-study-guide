@@ -86,6 +86,83 @@ function get_next_sequence(mysqli $conn,
 
     return intval($row['next_seq']);
 }
+/*
+============================================================
+
+get_notes()
+
+Returns all Study Notes for one card and
+orientation ordered by sequence number.
+
+Parameters
+
+$conn
+
+$card_id
+
+$orientation
+
+Returns
+
+Array of associative arrays.
+
+============================================================
+*/
+
+function get_notes(
+    mysqli $conn,
+    int $card_id,
+    string $orientation
+)
+{
+    $notes = array();
+
+$sql = "
+    SELECT
+        id,
+        sequence_no,
+        title,
+        description,
+        source,
+        enabled,
+        notes,
+        date_added
+    FROM
+        tarot_card_notes
+    WHERE
+        card_id = ?
+    AND
+        orientation = ?
+    ORDER BY
+        sequence_no
+";
+
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt)
+    {
+        return $notes;
+    }
+
+    $stmt->bind_param(
+        "is",
+        $card_id,
+        $orientation
+    );
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc())
+    {
+        $notes[] = $row;
+    }
+
+    $stmt->close();
+
+    return $notes;
+}
 
 /*
 ============================================================
