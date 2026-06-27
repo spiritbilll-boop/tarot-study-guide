@@ -399,22 +399,94 @@ function delete_study_note(
     int $id
 )
 {
-    $stmt =
-        $conn->prepare(
-            "
-            DELETE
-            FROM tarot_card_notes
-            WHERE id = ?
-            "
-        );
+    /*
+    --------------------------------------------
+    Find the note so we know what to resequence.
+    --------------------------------------------
+    */
+
+    $stmt = $conn->prepare(
+        "
+        SELECT
+            card_id,
+            orientation,
+            sequence_no
+        FROM
+            tarot_card_notes
+        WHERE
+            id = ?
+        "
+    );
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 0)
+    {
+        $stmt->close();
+        return false;
+    }
+
+    $row = $result->fetch_assoc();
+    $card_id     = intval($row['card_id']);
+    $orientation = $row['orientation'];
+    $sequence_no = intval($row['sequence_no']);
+
+    $stmt->close();
+
+    /*
+    --------------------------------------------
+    Delete the selected note.
+    --------------------------------------------
+    */
+
+    $stmt = $conn->prepare(
+        "
+        DELETE
+        FROM
+            tarot_card_notes
+        WHERE
+            id = ?
+        "
+    );
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    /*
+    --------------------------------------------
+    Close the sequence gap.
+    --------------------------------------------
+    */
+
+    $stmt = $conn->prepare(
+        "
+        UPDATE
+            tarot_card_notes
+        SET
+            sequence_no = sequence_no - 1
+        WHERE
+            card_id = ?
+        AND
+            orientation = ?
+        AND
+            sequence_no > ?
+        "
+    );
 
     $stmt->bind_param(
-        "i",
-        $id
+        "isi",
+        $card_id,
+        $orientation,
+        $sequence_no
     );
 
     $stmt->execute();
-
     $stmt->close();
+
+    return true;
 }
 ?>
