@@ -48,6 +48,35 @@ if ($edit_id > 0)
 }
 /*
 ============================================================
+
+Delete Request
+
+============================================================
+*/
+
+$delete_id =
+    isset($_GET['delete'])
+        ? intval($_GET['delete'])
+        : 0;
+
+if ($delete_id > 0)
+{
+    delete_study_note(
+        $conn,
+        $delete_id
+    );
+
+    header(
+        "Location: ?card_id=" .
+        $card_id .
+        "&orientation=" .
+        $orientation
+    );
+
+    exit;
+}
+/*
+============================================================
 Handle Save
 ============================================================
 */
