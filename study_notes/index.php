@@ -41,6 +41,80 @@ $notes =
         $card_id,
         $orientation
     );
+/*
+============================================================
+
+Handle Save
+
+============================================================
+*/
+
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] == "POST")
+{
+    $card_id =
+        intval($_POST['card_id']);
+
+    $orientation =
+        $_POST['orientation'];
+
+    $title =
+        trim($_POST['title']);
+
+    $description =
+        trim($_POST['description']);
+
+    $source =
+        trim($_POST['source']);
+
+    $notes_text =
+        trim($_POST['notes']);
+
+    $enabled =
+        isset($_POST['enabled']) ? 1 : 0;
+
+    if ($title == "")
+    {
+        $message =
+            "Please enter a title.";
+    }
+    elseif ($description == "")
+    {
+        $message =
+            "Please enter a description.";
+    }
+    else
+    {
+        insert_study_note(
+            $conn,
+            $card_id,
+            $orientation,
+            $title,
+            $description,
+            $source,
+            $notes_text,
+            $enabled
+        );
+
+        $message =
+            "Study Note saved.";
+
+        $next_sequence =
+            get_next_sequence(
+                $conn,
+                $card_id,
+                $orientation
+            );
+
+        $notes =
+            get_notes(
+                $conn,
+                $card_id,
+                $orientation
+            );
+    }
+}
 
 ?>
 <!DOCTYPE html>
