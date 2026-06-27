@@ -1,5 +1,5 @@
 <?php
-require_once 'auth.php';
+//require_once 'auth.php';
 require_once("study_notes/common.php");
 // The rest of your application code goes safely right below here...
 ?>

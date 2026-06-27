@@ -174,14 +174,20 @@ function insert_study_note(
     mysqli $conn,
     int $card_id,
     string $orientation,
-    int $sequence_no,
     string $title,
     string $description,
     string $source,
-    bool $enabled,
-    string $notes
+    string $notes,
+    bool $enabled
 )
 {
+    $sequence_no =
+        get_next_sequence(
+            $conn,
+            $card_id,
+            $orientation
+        );
+
     $sql = "
         INSERT INTO tarot_card_notes
         (
@@ -209,6 +215,11 @@ function insert_study_note(
 
     $stmt = $conn->prepare($sql);
 
+    if (!$stmt)
+    {
+        return false;
+    }
+
     $enabled_int = $enabled ? 1 : 0;
 
     $stmt->bind_param(
@@ -223,7 +234,11 @@ function insert_study_note(
         $notes
     );
 
-    return $stmt->execute();
+    $result = $stmt->execute();
+
+    $stmt->close();
+
+    return $result;
 }
 
 /*

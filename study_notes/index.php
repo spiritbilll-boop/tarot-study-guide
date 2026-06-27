@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -8,7 +7,7 @@ study_notes/index.php
 
 Study Notes Manager
 
-Version 1.1
+Controller
 
 ============================================================
 */
@@ -16,49 +15,36 @@ Version 1.1
 require_once("../database.php");
 require_once("common.php");
 
-$cards = get_cards($conn);
-
-$card_id =
-    isset($_GET['card_id'])
-        ? intval($_GET['card_id'])
-        : 1;
-
-$orientation =
-    isset($_GET['orientation'])
-        ? $_GET['orientation']
-        : "U";
-
-$next_sequence =
-    get_next_sequence(
-        $conn,
-        $card_id,
-        $orientation
-    );
-
-$notes =
-    get_notes(
-        $conn,
-        $card_id,
-        $orientation
-    );
 /*
 ============================================================
 
-Handle Save
+Defaults
 
 ============================================================
 */
 
 $message = "";
 
+$card_id =
+    isset($_REQUEST['card_id'])
+        ? intval($_REQUEST['card_id'])
+        : 1;
+
+$orientation =
+    isset($_REQUEST['orientation'])
+        ? $_REQUEST['orientation']
+        : "U";
+
+/*
+============================================================
+
+Save Study Note
+
+============================================================
+*/
+
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
-    $card_id =
-        intval($_POST['card_id']);
-
-    $orientation =
-        $_POST['orientation'];
-
     $title =
         trim($_POST['title']);
 
@@ -98,262 +84,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
         );
 
         $message =
-            "Study Note saved.";
-
-        $next_sequence =
-            get_next_sequence(
-                $conn,
-                $card_id,
-                $orientation
-            );
-
-        $notes =
-            get_notes(
-                $conn,
-                $card_id,
-                $orientation
-            );
+            "Study Note saved successfully.";
     }
 }
 
-?>
-<!DOCTYPE html>
+/*
+============================================================
 
-<html>
+Load page data
 
-<head>
+============================================================
+*/
 
-<meta charset="utf-8">
+$cards =
+    get_cards($conn);
 
-<title>
+$notes =
+    get_notes(
+        $conn,
+        $card_id,
+        $orientation
+    );
 
-Study Notes Manager
+$next_sequence =
+    get_next_sequence(
+        $conn,
+        $card_id,
+        $orientation
+    );
 
-</title>
+/*
+============================================================
 
-</head>
+Display page
 
-<body>
+============================================================
+*/
 
-<h1>
-
-Study Notes Manager
-
-</h1>
-
-<p>
-
-Cards Loaded:
-
-<b>
-
-<?php echo count($cards); ?>
-</b>
-</p>
-<form method="get">
-<table>
-<tr>
-<td>
-<b>Card</b>
-</td>
-<td>
-<select
-    name="card_id"
-    onchange="this.form.submit()">
-
-<?php
-foreach($cards as $card)
-{
-
-?>
-
-<option
-value="<?php echo $card['id']; ?>"
-
-<?php
-
-if($card['id'] == $card_id)
-{
-    echo " selected";
-}
-
-?>
-
->
-
-<?php echo h($card['card_name']); ?>
-
-</option>
-
-<?php
-
-}
-
-?>
-
-</select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-<b>Orientation</b>
-
-</td>
-
-<td>
-
-<label>
-
-<input
-type="radio"
-name="orientation"
-value="U"
-
-<?php
-
-if($orientation == "U")
-{
-    echo " checked";
-}
-
-?>
-
-onchange="this.form.submit()">
-
-Upright
-
-</label>
-
-&nbsp;&nbsp;
-
-<label>
-
-<input
-type="radio"
-name="orientation"
-value="R"
-
-<?php
-
-if($orientation == "R")
-{
-    echo " checked";
-}
-
-?>
-
-onchange="this.form.submit()">
-
-Reversed
-
-</label>
-
-</td>
-
-</tr>
-
-</table>
-
-</form>
-
-<p>
-
-Next Sequence:
-
-<strong>
-
-<?php echo $next_sequence; ?>
-
-</strong>
-
-</p>
-
-</h2>
-
-<?php
-
-if (count($notes) == 0)
-{
-
-?>
-
-<p>
-
-No study notes yet.
-
-</p>
-
-<?php
-
-}
-else
-{
-
-?>
-
-<table
-border="1"
-cellpadding="6"
-cellspacing="0">
-
-<tr>
-
-<th>
-
-Seq
-
-</th>
-
-<th>
-
-Title
-
-</th>
-
-</tr>
-
-<?php
-
-foreach ($notes as $note)
-{
-
-?>
-
-<tr>
-
-<td>
-
-<?php echo $note['sequence_no']; ?>
-
-</td>
-
-<td>
-
-<?php echo h($note['title']); ?>
-
-</td>
-
-</tr>
-
-<?php
-
-}
-
-?>
-
-</table>
-
-<?php
-
-}
-
-?>
-
-</body>
-
-</html>
+require("form.php");
