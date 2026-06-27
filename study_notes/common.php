@@ -293,4 +293,105 @@ function display_message($message)
     echo "</div>";
 }
 
+/*
+============================================================
+
+Get one Study Note
+
+============================================================
+*/
+
+function get_study_note(
+    mysqli $conn,
+    int $id
+)
+{
+    $sql = "
+        SELECT
+            *
+        FROM
+            tarot_card_notes
+        WHERE
+            id = ?
+    ";
+
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt)
+    {
+        return null;
+    }
+
+    $stmt->bind_param(
+        "i",
+        $id
+    );
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_assoc();
+
+    $stmt->close();
+
+    return $row;
+}
+
+/*
+============================================================
+
+Update Study Note
+
+============================================================
+*/
+
+function update_study_note(
+    mysqli $conn,
+    int $id,
+    string $title,
+    string $description,
+    string $source,
+    string $notes,
+    bool $enabled
+)
+{
+    $sql = "
+        UPDATE
+            tarot_card_notes
+        SET
+            title = ?,
+            description = ?,
+            source = ?,
+            notes = ?,
+            enabled = ?
+        WHERE
+            id = ?
+    ";
+
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt)
+    {
+        return false;
+    }
+
+    $enabled_int = $enabled ? 1 : 0;
+
+    $stmt->bind_param(
+        "ssssii",
+        $title,
+        $description,
+        $source,
+        $notes,
+        $enabled_int,
+        $id
+    );
+
+    $result = $stmt->execute();
+
+    $stmt->close();
+
+    return $result;
+}
 ?>
