@@ -191,25 +191,94 @@ Reversed
 
 Next Sequence:
 
-<b>
+<strong>
 
 <?php echo $next_sequence; ?>
 
-</b>
+</strong>
 
 </p>
+
+</h2>
+
+<?php
+
+if (count($notes) == 0)
+{
+
+?>
 
 <p>
 
-Existing Notes:
-
-<b>
-
-<?php echo count($notes); ?>
-
-</b>
+No study notes yet.
 
 </p>
+
+<?php
+
+}
+else
+{
+
+?>
+
+<table
+border="1"
+cellpadding="6"
+cellspacing="0">
+
+<tr>
+
+<th>
+
+Seq
+
+</th>
+
+<th>
+
+Title
+
+</th>
+
+</tr>
+
+<?php
+
+foreach ($notes as $note)
+{
+
+?>
+
+<tr>
+
+<td>
+
+<?php echo $note['sequence_no']; ?>
+
+</td>
+
+<td>
+
+<?php echo h($note['title']); ?>
+
+</td>
+
+</tr>
+
+<?php
+
+}
+
+?>
+
+</table>
+
+<?php
+
+}
+
+?>
 
 </body>
 
