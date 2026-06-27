@@ -218,121 +218,81 @@ Reversed
 </table>
 
 <hr>
-
 <p>
-
 <b>
-
 Next Sequence:
-
 </b>
-
 <?php echo $next_sequence; ?>
-
 </p>
-
 <h2>
-
 Existing Notes
-
 </h2>
-
 <?php
-
 if (count($notes) == 0)
 {
-
 ?>
-
 <p>
-
 No study notes yet.
-
 </p>
-
 <?php
-
 }
 else
 {
-
 ?>
-
 <table class="notes-table">
 
 <tr>
-
 <th>
-
 Seq
-
 </th>
-
 <th>
-
 Title
-
 </th>
-
-</tr>
-
+<th>
+Action
+</th>
 <?php
-
 foreach ($notes as $note)
 {
-
 ?>
-
 <tr>
-
 <td>
-
 <?php echo $note['sequence_no']; ?>
-
+</td>
+<td>
+<?php echo h($note['title']); ?>
 </td>
 
 <td>
-
-<?php echo h($note['title']); ?>
-
+<a href="?card_id=<?php
+echo $card_id;
+?>&orientation=<?php
+echo $orientation;
+?>&edit=<?php
+echo $note['id'];
+?>">
+Edit
+</a>
 </td>
-
 </tr>
 
 <?php
-
 }
-
 ?>
-
 </table>
-
 <?php
-
 }
-
 ?>
-
 <hr>
-
 <h2>
-
 New Study Note
-
 </h2>
-
 <table>
-
 <tr>
-
 <td>
-
 Title
-
 </td>
-
 <td>
-
 <input
 type="text"
 name="title"
