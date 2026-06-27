@@ -394,4 +394,27 @@ function update_study_note(
 
     return $result;
 }
+function delete_study_note(
+    mysqli $conn,
+    int $id
+)
+{
+    $stmt =
+        $conn->prepare(
+            "
+            DELETE
+            FROM tarot_card_notes
+            WHERE id = ?
+            "
+        );
+
+    $stmt->bind_param(
+        "i",
+        $id
+    );
+
+    $stmt->execute();
+
+    $stmt->close();
+}
 ?>

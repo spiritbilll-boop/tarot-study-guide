@@ -130,7 +130,6 @@ action="">
 <select
 name="card_id"
 onchange="this.form.submit()">
-
 <?php
 
 foreach ($cards as $card)
@@ -239,7 +238,7 @@ Next Sequence:
 </p>
 
 <h2>
-<?php echo $form_title; ?>
+<?php echo h($form_title); ?>
 </h2>
 
 <?php
@@ -257,19 +256,15 @@ else
 <table class="notes-table">
 
 <tr>
-<th>
-Seq
-</th>
-<th>
-Title
-</th>
-<th>
-Action
-</th>
+<th>Seq</th>
+<th>Title</th>
+<th>Action</th>
+</tr>
 <?php
 foreach ($notes as $note)
 {
 ?>
+
 <tr>
 <td>
 <?php echo $note['sequence_no']; ?>
@@ -277,7 +272,6 @@ foreach ($notes as $note)
 <td>
 <?php echo h($note['title']); ?>
 </td>
-
 <td>
 <a href="?card_id=<?php
 echo $card_id;
@@ -288,9 +282,20 @@ echo $note['id'];
 ?>">
 Edit
 </a>
+&nbsp;|&nbsp;
+<a
+href="?card_id=<?php
+echo $card_id;
+?>&orientation=<?php
+echo $orientation;
+?>&delete=<?php
+echo $note['id'];
+?>"
+onclick="return confirm('Delete this Study Note?');">
+Delete
+</a>
 </td>
 </tr>
-
 <?php
 }
 ?>
@@ -300,7 +305,7 @@ Edit
 ?>
 <hr>
 <h2>
-New Study Note
+<?php echo h($form_title); ?>
 </h2>
 <table>
 <tr>
@@ -339,9 +344,7 @@ rows="8"><?php echo h($description_value); ?></textarea>
 <tr>
 
 <td>
-
 Source
-
 </td>
 
 <td>
@@ -382,33 +385,36 @@ type="checkbox"
 name="enabled"
 <?php if ($enabled_value) echo "checked"; ?>
 >
-
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 &nbsp;
-
 </td>
-
 <td>
 
 <input
 type="submit"
 value="<?php echo $button_text; ?>">
 
+<?php
+if ($is_edit)
+{
+?>
+<input
+type="button"
+value="Cancel"
+onclick="window.location='?card_id=<?php
+echo $card_id;
+?>&orientation=<?php
+echo $orientation;
+?>';">
+<?php
+}
+?>
 </td>
-
 </tr>
-
 </table>
-
 </form>
-
 </body>
-
 </html>
