@@ -1,7 +1,13 @@
+<?php
+require_once "common.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<link
+rel="stylesheet"
+href="../css/style.css">
 <title>
 Tarot Study Guide CMS
 </title>
@@ -22,37 +28,59 @@ trim(
 ?>
 </p>
 <hr>
+<div class="panel">
 <h2>
 Administration
 </h2>
-<ul>
-<li>
+<ul class="menu">
+<li class="menu-item">
 <a href="../study_notes/">
 Study Notes
 </a>
 </li>
-<li>
+<li class="menu-item">
 <a href="../cards/">
 Card Browser
 </a>
 </li>
-<li>
-Search
-(Coming Soon)
+<li class="menu-item">
+Search (Coming Soon)
 </li>
-<li>
-Reports
-(Coming Soon)
+<li class="menu-item">
+Reports (Coming Soon)
 </li>
 </ul>
+</div>
 <hr>
+<div class="panel">
 <h2>
 Statistics
 </h2>
 <p>
-Coming Soon
+Cards:
+<strong>
+<?php
+echo
+get_card_count(
+    $conn
+);
+?>
+</strong>
 </p>
+<p>
+Study Notes:
+<strong>
+<?php
+echo
+get_study_note_count(
+    $conn
+);
+?>
+</strong>
+</p>
+</div>
 <hr>
+<div class="panel">
 <h2>
 System
 </h2>
@@ -60,5 +88,6 @@ System
 Database:
 Connected
 </p>
+</div>
 </body>
 </html>
