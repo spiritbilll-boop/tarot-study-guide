@@ -1,0 +1,49 @@
+/*
+============================================================
+
+Tarot Study Guide CMS
+Theme Definition
+
+This file defines the application's visual identity.
+
+============================================================
+*/
+
+body
+{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    line-height: 1.5;
+
+    background-color: #f5f5f5;
+
+    color: #222222;
+}
+
+h1
+{
+    color: #1d3557;
+
+    border-bottom: 3px solid #457b9d;
+
+    padding-bottom: 10px;
+}
+
+h2
+{
+    color: #457b9d;
+
+    margin-top: 30px;
+}
+
+a
+{
+    color: #0066cc;
+
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
