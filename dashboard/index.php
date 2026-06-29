@@ -92,17 +92,62 @@ get_enabled_study_note_count(
 ?>
 </strong>
 </p>
+
 <p>
+
 Study Notes Disabled:
+
 <strong>
+
 <?php
+
 echo
 get_disabled_study_note_count(
     $conn
 );
+
 ?>
+
 </strong>
+
 </p>
+
+<p>
+
+Cards With Study Notes:
+
+<strong>
+
+<?php
+echo
+get_cards_with_study_notes(
+    $conn
+);
+
+?>
+
+</strong>
+
+</p>
+<p>
+
+Cards Without Study Notes:
+
+<strong>
+
+<?php
+
+echo
+get_cards_without_study_notes(
+    $conn
+);
+
+?>
+
+</strong>
+
+</p>
+
 </div>
 <hr>
 <div class="panel">
