@@ -146,3 +146,29 @@ function get_cards_without_study_notes(
             $conn
         );
 }
+function get_coverage_percentage(
+    mysqli $conn
+)
+{
+    $cards =
+        get_card_count(
+            $conn
+        );
+
+    if (
+        $cards == 0
+    )
+    {
+        return 0.0;
+    }
+
+    return
+        (
+            get_cards_with_study_notes(
+                $conn
+            )
+            /
+            $cards
+        )
+        * 100.0;
+}

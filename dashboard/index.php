@@ -147,6 +147,28 @@ get_cards_without_study_notes(
 </strong>
 
 </p>
+<p>
+
+Coverage:
+
+<strong>
+
+<?php
+
+echo
+number_format(
+    get_coverage_percentage(
+        $conn
+    ),
+    2
+)
+. "%";
+
+?>
+
+</strong>
+
+</p>
 
 </div>
 <hr>
