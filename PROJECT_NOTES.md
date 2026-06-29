@@ -8,6 +8,11 @@ Current Version
 
 0.2.0-dev
 
+Typography: The CMS uses a serif typeface
+(Georgia with Times New Roman fallback) to
+reinforce its role as a scholarly knowledge
+base and to improve readability of long-form study notes.
+
 Current Status
 
 Working on the Delete feature for Study Notes.

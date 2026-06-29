@@ -37,6 +37,43 @@ Administration
 <a href="../study_notes/">
 Study Notes
 </a>
+<p>
+
+Study Notes Enabled:
+
+<strong>
+
+<?php
+
+echo
+get_enabled_study_note_count(
+    $conn
+);
+
+?>
+
+</strong>
+
+</p>
+
+<p>
+
+Study Notes Disabled:
+
+<strong>
+
+<?php
+
+echo
+get_disabled_study_note_count(
+    $conn
+);
+
+?>
+
+</strong>
+
+</p>
 </li>
 <li class="menu-item">
 <a href="../cards/">

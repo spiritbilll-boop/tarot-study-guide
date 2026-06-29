@@ -66,3 +66,62 @@ function get_card_count(
             $row['total']
         );
 }
+function get_enabled_study_note_count(
+    mysqli $conn
+)
+{
+    $sql =
+        "
+        SELECT
+            COUNT(*)
+        AS
+            total
+        FROM
+            tarot_card_notes
+        WHERE
+            enabled = 1
+        ";
+
+    $result =
+        $conn->query(
+            $sql
+        );
+
+    $row =
+        $result->fetch_assoc();
+
+    return
+        intval(
+            $row['total']
+        );
+}
+
+function get_disabled_study_note_count(
+    mysqli $conn
+)
+{
+    $sql =
+        "
+        SELECT
+            COUNT(*)
+        AS
+            total
+        FROM
+            tarot_card_notes
+        WHERE
+            enabled = 0
+        ";
+
+    $result =
+        $conn->query(
+            $sql
+        );
+
+    $row =
+        $result->fetch_assoc();
+
+    return
+        intval(
+            $row['total']
+        );
+}
