@@ -201,7 +201,8 @@ function h($text)
 }
 function get_enabled_notes_for_card(
     mysqli $conn,
-    int $card_id
+    int $card_id,
+    string $orientation
 )
 {
     $sql =
@@ -209,24 +210,26 @@ function get_enabled_notes_for_card(
         SELECT
             title,
             description,
+            notes,
             source
         FROM
             tarot_card_notes
         WHERE
             card_id = ?
         AND
+            orientation = ?
+        AND
             enabled = 1
-        ORDER BY
-            sequence_no
         ";
     $stmt =
         $conn->prepare(
             $sql
         );
     $stmt->bind_param(
-        "i",
-        $card_id
-    );
+        "is",
+        $card_id,
+        $orientation
+);
     $stmt->execute();
     $result =
         $stmt->get_result();

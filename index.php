@@ -38,9 +38,9 @@ $position_labels = [
         "Goal",
         "Past",
         "Near Future",
-        "The Querent",
-        "Influences",
-        "Environment",
+        "The Querent (current state)",
+        "The Querent (the Influences)",
+        "The Environment",
         "Hopes and Fears",
         "Final Outcome"
     ]
@@ -214,9 +214,12 @@ $stmt->close();
   echo "The time is " . $currentDate . " GMT";
 ?>
 
-   <p> This application is in beta testing.
-Please continue to report any errors and give feedback to me. Thank you in advance. :-)
-</p>
+<p>Welcome to the beta release of our Tarot application! This project is the result of a unique, collaborative effort between a two-person team: myself and ChatGPT.</p>
+<p>Operating on a self-hosted LAMP stack, this application came to life through a dynamic, back-and-forth partnership. While I managed the system environment and project direction, ChatGPT did the vast majority of the heavy lifting for the PHP and HTML coding.</p>
+<p>Our development process was truly iterative. Together, we established a GitHub repository to track our progress, write, debug, and test the code. There were brilliant moments where ChatGPT delivered flawless, production-ready code on the very first try. There were also plenty of times where I caught bugs in its logic, reported them back, and watched it pivot to find a fix. We spent weeks complimenting each other's breakthroughs and untangling complex problems.</p>
+<p>At one point, after deploying a particularly exciting enhancement, I sent a screenshot of the new feature to my AI partner with a message that perfectly captures the spirit of this project:</p>
+<p>"Congratulations to the non-sentient member of the two-person team using a GitHub repository to write, debug, and test this code."</p>
+<p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it!</p>
 
     <form method="POST" action="">
         <label for="question">Focus your mind and enter your question:</label>
@@ -273,26 +276,42 @@ ID=<?php echo $card['id']; ?><br>
     <?php echo $card['is_reversed'] ? '(Reversed)' : '(Upright)'; ?>
 </h4>
 
-<p style="font-size: 14px; text-align: left;">
-<?php echo nl2br(htmlspecialchars(
-    $card['is_reversed']
-        ? $card['meaning_reversed']
-        : $card['meaning_upright']
-)); ?>
+<?php
+if (!empty($note['notes']))
+{
+?>
+<p>
+<?php echo nl2br(h($note['notes'])); ?>
 </p>
+<?php
+}
+?>
+
+
 <?php
 $study_notes =
     get_enabled_notes_for_card(
         $conn,
-        $card['id']
+        $card['id'],
+        $card['is_reversed']
+            ? 'R'
+            : 'U'
     );
 
 if (!empty($study_notes))
 {
 ?>
-<hr>
+<div style="height:20px;"></div><hr>
 
-<h3>Study Notes</h3>
+<h3 style="
+    margin-top:30px;
+    margin-bottom:20px;
+    text-align:center;
+    font-size:28px;
+    letter-spacing:1px;
+">
+    Study Notes
+</h3>
 
 <?php
 foreach ($study_notes as $note)
@@ -300,33 +319,48 @@ foreach ($study_notes as $note)
 ?>
 
 <div style="
-    background:#ffffff;
-    color:#000000;
-    border-radius:8px;
-    padding:12px;
-    margin-bottom:12px;
+    background:#fdfdfd;
+    color:#222;
+    border:1px solid #d6d6d6;
+    border-left:6px solid #4b6cb7;
+    border-radius:10px;
+    padding:18px;
+    margin:20px 0;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
     text-align:left;
 ">
 
-<strong>
+<div style="
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:12px;
+">
 <?php echo h($note['title']); ?>
-</strong>
+</div>
+<div style="height:10px;"></div>
 
 <?php
 if (!empty($note['description']))
 {
 ?>
-<br>
+<div style="margin-bottom:12px;">
 <em>
 <?php echo h($note['description']); ?>
 </em>
+</div>
 <?php
 }
 ?>
-
-<p>
-<?php echo nl2br(h($note['source'])); ?>
-</p>
+<div style="
+    margin-top:18px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+    text-align:right;
+    font-size:14px;
+    color:#666;
+">
+    <em>Source:</em>
+    <?php echo h($note['source']); ?>
 
 </div>
 
