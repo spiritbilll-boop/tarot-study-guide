@@ -280,7 +280,60 @@ ID=<?php echo $card['id']; ?><br>
         : $card['meaning_upright']
 )); ?>
 </p>
+<?php
+$study_notes =
+    get_enabled_notes_for_card(
+        $conn,
+        $card['id']
+    );
 
+if (!empty($study_notes))
+{
+?>
+<hr>
+
+<h3>Study Notes</h3>
+
+<?php
+foreach ($study_notes as $note)
+{
+?>
+
+<div style="
+    background:#ffffff;
+    color:#000000;
+    border-radius:8px;
+    padding:12px;
+    margin-bottom:12px;
+    text-align:left;
+">
+
+<strong>
+<?php echo h($note['title']); ?>
+</strong>
+
+<?php
+if (!empty($note['description']))
+{
+?>
+<br>
+<em>
+<?php echo h($note['description']); ?>
+</em>
+<?php
+}
+?>
+
+<p>
+<?php echo nl2br(h($note['source'])); ?>
+</p>
+
+</div>
+
+<?php
+}
+}
+?>
     </div>
             <?php endforeach; ?>
         </div>
