@@ -2,28 +2,8 @@
 //require_once 'auth.php';
 require_once("study_notes/common.php");
 // The rest of your application code goes safely right below here...
-?>
-<?php
-// .tarot-card is where you change width of card container
-// 1. DATABASE CONNECTION
-$host = 'localhost';
-$db   = 'tarot_db';
-$user = 'tarot_db';
-$pass = 'tarot_db';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-
-try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-     die("Database connection failed: " . $e->getMessage());
-}
+// mysqli, NOT PDO
+require_once __DIR__ . '/common/db.php';
 
 // 2. CONFIGURING SPREADS
 $spreads = [

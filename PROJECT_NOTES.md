@@ -1,5 +1,15 @@
 # Tarot Study Guide CMS
 
+Reader Modernization
+====================
+
+Goal:
+
+Replace PDO with MySQLi.
+
+No visible behavior changes.
+
+Prepare Reader for integrated Study Notes.
 Current Branch
 
 feature/delete-study-notes
