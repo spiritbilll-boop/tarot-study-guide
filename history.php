@@ -80,20 +80,26 @@ $ids =
         ',',
         $reading['card_ids']
     );
+$orientations =
+    explode(
+        ',',
+        $reading['card_orientations']
+    );
+
 
 foreach ($ids as $index => $id)
 {
-    $id = (int) trim($id);
-
-    if ($index > 0)
-    {
-        echo "<br>";
-    }
-
+$orientation = $orientations[$index] ?? '?';
+if ($index > 0)
+{
+    echo "<br>";
+}
 echo
     "<strong>#" .
     $id .
-    "</strong>  " .
+    "</strong> [" .
+    $orientation .
+    "] " .
     htmlspecialchars(
         get_card_name(
             $conn,
@@ -105,9 +111,7 @@ echo
 ?>
 
 </p>
-
 </div>
-
 <br>
 
 <?php

@@ -11,7 +11,8 @@ function get_recent_readings(
             created_at,
             user_question,
             reading_type,
-            card_ids
+            card_ids,
+            card_orientations
          FROM tarot_readings
          ORDER BY id DESC
          LIMIT ?";

@@ -67,24 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['draw'])) {
     shuffle($deck);
     $drawn_ids = array_slice($deck, 0, $card_count);
     
-    // Save to database
-    $stmt = $conn->prepare(
-        "INSERT INTO tarot_readings
-         (user_question, reading_type, card_ids)
-         VALUES (?, ?, ?)"
-    );
-    
-    $card_ids = implode(',', $drawn_ids);
-    
-    $stmt->bind_param(
-        "sss",
-        $question,
-        $selected_spread,
-        $card_ids
-    );
-    
-    $stmt->execute();
-    $stmt->close();
     
     // Fetch the drawn card details from our database
     // Using an array map to ensure all IDs are integers for security
@@ -120,9 +102,40 @@ $stmt->close();
             $card = $cards_by_id[$id];
             // 50% chance for the card to be reversed
             $card['is_reversed'] = (rand(0, 1) === 1); 
+$orientation_codes[] =
+    $card['is_reversed']
+        ? 'R'
+        : 'U';
             $reading_results[] = $card;
         }
     }
+$card_orientations =
+    implode(
+        ',',
+        $orientation_codes
+    );
+    // Save to database
+    $stmt = $conn->prepare(
+    "INSERT INTO tarot_readings
+    (user_question,
+    reading_type,
+    card_ids,
+    card_orientations)
+    VALUES (?, ?, ?, ?)"
+    );
+    
+    $card_ids = implode(',', $drawn_ids);
+    
+    $stmt->bind_param(
+    "ssss",
+    $question,
+    $selected_spread,
+    $card_ids,
+    $card_orientations
+    );
+    
+    $stmt->execute();
+    $stmt->close();
 }
 ?>
 
