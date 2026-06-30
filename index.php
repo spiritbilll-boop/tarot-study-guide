@@ -68,15 +68,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['draw'])) {
     $drawn_ids = array_slice($deck, 0, $card_count);
     
     // Save to database
-    $stmt = $pdo->prepare("INSERT INTO tarot_readings (user_question, reading_type, card_ids) VALUES (?, ?, ?)");
-    $stmt->execute([$question, $selected_spread, implode(',', $drawn_ids)]);
+    $stmt = $conn->prepare(
+        "INSERT INTO tarot_readings
+         (user_question, reading_type, card_ids)
+         VALUES (?, ?, ?)"
+    );
+    
+    $card_ids = implode(',', $drawn_ids);
+    
+    $stmt->bind_param(
+        "sss",
+        $question,
+        $selected_spread,
+        $card_ids
+    );
+    
+    $stmt->execute();
+    $stmt->close();
     
     // Fetch the drawn card details from our database
     // Using an array map to ensure all IDs are integers for security
-    $in_clause = implode(',', array_fill(0, count($drawn_ids), '?'));
-    $stmt = $pdo->prepare("SELECT * FROM tarot_cards WHERE id IN ($in_clause)");
-    $stmt->execute($drawn_ids);
-    $fetched_cards = $stmt->fetchAll();
+$in_clause = implode(',', array_fill(0, count($drawn_ids), '?'));
+
+$stmt = $conn->prepare(
+    "SELECT * FROM tarot_cards WHERE id IN ($in_clause)"
+);
+
+$types = str_repeat('i', count($drawn_ids));
+
+$stmt->bind_param(
+    $types,
+    ...$drawn_ids
+);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$fetched_cards = $result->fetch_all(MYSQLI_ASSOC);
+
+$stmt->close();
     
     // Reorder fetched cards to match the original random draw sequence
     $cards_by_id = [];
