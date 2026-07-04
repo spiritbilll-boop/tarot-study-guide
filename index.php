@@ -10,7 +10,7 @@ $spreads = [
     'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
     'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
     'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
-    '5 card Self Assesment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
+    'five card Self Assessment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
     'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
 ];
 $position_labels = [
@@ -31,6 +31,14 @@ $position_labels = [
         "Past",
         "Present",
         "Future"
+    ],
+
+    'five card Self Assessment & Potential' => [
+        "My Best Qualities",
+        "My Gift To Others",
+        "What Brings me joy",
+        "Unrecognized Potential",
+        "How I Perceive Myself"
     ],
 
     'Celtic Cross' => [
@@ -146,7 +154,7 @@ $card_orientations =
 <meta charset="UTF-8">
 <title>Tarot Card Reading</title>
 <style>
-  body { font-family: Times, serif; background: #1a1a2e; color: #fff; margin: 0 auto; padding: 20px; text-align: center; }
+  body { font-family: Times, serif; background: #1a1a2e; color: #fff; margin: 0 auto; padding: 20px;  text-align: center;}
   .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -231,24 +239,12 @@ $card_orientations =
 <p>Welcome to the beta release of our Tarot application. This project is the
 result of a unique, collaborative effort between a two-person team of me and ChatGPT.</p>
 <p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it.</p>
-<center>
 <a class="nav-link" href="/docs/tarot_overview.php" target=_blank>Tarot Deck: High-Level Outline</a>
 <hr>
-<table border=1>
-<tr>
-<th>Card Numbers</th><th>Location in the database Tarot 78-card Deck</th>
-</tr>
-<tr>
-<td align=center>1–14</td><td align=center>Cups</td></tr>
-<td align=center>15–28</td><td align=center>Wands Ace -> King</td></tr>
-<td align=center>29–42</td><td align=center>Swords</td></tr>
-<td align=center>43–56</td><td align=center>Pentacles</td></tr>
-<td align=center>57–78</td><td align=center>Major Arcana in Fool-to-World order</td>
-</tr>
-</table>
-</center>
+
 <br>
     <form method="POST" action="">
+<center>
         <label for="question">Focus your mind and enter your question:</label>
         <input type="text" id="question" name="question" value="<?php echo htmlspecialchars($question); ?>" required placeholder="e.g., What does my career path look like this month?">
         
@@ -261,9 +257,7 @@ result of a unique, collaborative effort between a two-person team of me and Cha
             <?php endforeach; ?>
         </select>
         
-<center>
         <button type="submit" name="draw">Draw Deck</button>
-</center>
     </form>
 
     <?php if (!empty($reading_results)): ?>
@@ -291,9 +285,10 @@ if (isset($position_labels[$selected_spread][$index]))
 
 </h3>
 
-        <img src="cards/<?php echo htmlspecialchars($card['image_file']); ?>"
-             alt="<?php echo htmlspecialchars($card['card_name']); ?>"
-             class="<?php echo $card['is_reversed'] ? 'reversed' : ''; ?>">
+<img src="cards/<?php echo htmlspecialchars($card['image_file']); ?>"
+alt="<?php echo htmlspecialchars($card['card_name']); ?>"
+class="<?php echo $card['is_reversed'] ? 'reversed' : ''; ?>" >
+
 <p style="Times New Roman", Times, serif>
 ID=<?php echo $card['id']; ?><br>
 </p>
@@ -403,98 +398,6 @@ if (!empty($note['description']))
 <br><a href="/i-ching">Do an I Ching Consultation</a>
 <br><a href="/">Go to the Main Page</a>
 <center>
-</center>
-    <h2 data-path-to-node="4">The Art of Inquiry: How to Consult the Tarot</h2>
-    <p data-path-to-node="5">Welcome to this sacred space of reflection. The
-      Tarot is not a tool for mere fortune-telling or a parlor trick to predict
-      a rigid future. Instead, it acts as a cosmic mirror, reflecting the hidden
-      dynamics, psychological currents, and shifting energies of your present
-      situation.</p>
-    <p data-path-to-node="6">To receive a clear answer from the Tarot, you must
-      approach it with a clear mind. The quality of your insight depends
-      entirely on the quality of your inquiry.</p>
-    <h2 data-path-to-node="8">The Power of the Preliminary Pause</h2>
-    <p data-path-to-node="9">Before you click "Draw Deck", I ask you to pause.</p>
-    <p data-path-to-node="10">In our fast-paced digital world, our instinct is
-      to react instantly, to demand immediate answers to chaotic thoughts. But
-      the Tarot responds to stillness. Take three deep breaths. Ground yourself
-      in the present moment. Clear away the immediate static of anxiety,
-      frustration, or impatience.</p>
-    <p data-path-to-node="11">Approach the tarot not as a passive spectator
-      waiting to be told what to do, but as an active participant seeking
-      wisdom. Treat this moment as a serious conversation with a wise, objective
-      mentor.</p>
-    <h2 data-path-to-node="13">Formulating Your Question</h2>
-    <p data-path-to-node="14">Properly considering and phrasing your question is
-      the most crucial part of the entire process. A vague, chaotic, or
-      double-minded question will result in a confusing, fragmented card spray.</p>
-    <p data-path-to-node="15">When formulating your question, follow these
-      essential guidelines:</p>
-    <h3 data-path-to-node="16">1. Avoid "Yes" or "No" Questions</h3>
-    <p data-path-to-node="17">The Oracle speaks in nuances, cycles, and
-      transformations. Questions like <i data-path-to-node="17" data-index-in-node="74">"Should
-        I quit my job?"</i> or <i data-path-to-node="17" data-index-in-node="101">"Will
-        I get back with my ex?"</i> force a binary choice onto a universe that
-      operates in fluid waves.</p>
-        <p>Instead of:</b> <i data-path-to-node="18,0,0" data-index-in-node="12">"Will
-            my new business succeed?"</i></p>
-        <p><b data-path-to-node="18,1,0" data-index-in-node="0">Try:</b>
-          <i data-path-to-node="18,1,0" data-index-in-node="5">"What energies or
-            obstacles should I expect if I pursue this new business venture?"</i></p>
-    <h3 data-path-to-node="19">2. Focus on Your Agency (Own Your Position)</h3>
-    <p data-path-to-node="20">You cannot control the actions of others, but you
-      can control your own responses, attitude, and character. Frame your
-      inquiry around your own path of right action.</p>
-        <p data-path-to-node="21,0,0"><b data-path-to-node="21,0,0" data-index-in-node="0">Instead
-            of:</b> <i data-path-to-node="21,0,0" data-index-in-node="12">"Why
-            is my partner being so distant?"</i></p>
-        <p data-path-to-node="21,1,0"><b data-path-to-node="21,1,0" data-index-in-node="0">Try:</b>
-          <i data-path-to-node="21,1,0" data-index-in-node="5">"How can I best
-            navigate the current distance in my relationship, and what is
-            required of me right now?"</i></p>
-    <h3 data-path-to-node="22">3. Seek Insight into the Present</h3>
-    <p data-path-to-node="23">The future is not set in stone; it is born from
-      the seeds of the present. Ask for clarity on <i data-path-to-node="23" data-index-in-node="93">what
-        is happening right now</i> so you can make the wisest choices moving
-      forward.</p>
-        <p data-path-to-node="24,0,0"><b data-path-to-node="24,0,0" data-index-in-node="0">Great
-            starting phrases include:</b></p>
-            <p data-path-to-node="24,0,1,0,0"><i data-path-to-node="24,0,1,0,0"
-                data-index-in-node="0">"What is the true nature of the situation
-                regarding..."</i></p>
-            <p data-path-to-node="24,0,1,1,0"><i data-path-to-node="24,0,1,1,0"
-                data-index-in-node="0">"What do I need to understand about my
-                current relationship with..."</i></p>
-            <p data-path-to-node="24,0,1,2,0"><i data-path-to-node="24,0,1,2,0"
-                data-index-in-node="0">"What is the wisest approach to take
-                regarding..."</i></p>
-    <h2 data-path-to-node="26">How to Proceed with Your Reading</h2>
-        <p data-path-to-node="27,0,0"><b data-path-to-node="27,0,0" data-index-in-node="0">Write
-            It Down:</b> Physically type or write your question out on a piece
-          of paper. The act of writing forces your brain to crystallize your
-          thoughts. If you cannot summarize your inquiry into one or two clear
-          sentences, your mind is still too crowded. Simplify until it is pure.</p>
-        <p data-path-to-node="27,1,0"><b data-path-to-node="27,1,0" data-index-in-node="0">Hold
-            the Intent:</b> As you prepare to click/tap the "Draw Deck" button, hold the
-          written question in your mind's eye. Visualize the people, choices, or
-          feelings involved. Let your intent fill the space.</p>
-        <p data-path-to-node="27,2,0"><b data-path-to-node="27,2,0" data-index-in-node="0">Draw
-            the Deck:</b> Click/tap the button to see and read the result.</p>
-        <p data-path-to-node="27,3,0"><b data-path-to-node="27,3,0" data-index-in-node="0">Contemplate
-            the Cards:</b>&nbsp; Do not rush. Sit with what you see and read for
-          a moment. Let it settle into your intuition.</p>
-    <p data-path-to-node="28">Remember, the Tarot does not strip away your free
-      will; it illuminates it. Use the wisdom generated here to cultivate
-      patience when the oracle advises waiting, and to find courage when it
-      signals that the time has come to cross the great water.</p>
-    <p>Disclaimer: The views and experiences shared in this tool reflect
-      personal perspectives on spirituality, self-discovery, and personal
-      growth. They are offered for informational and inspirational purposes only
-      and should not be considered professional, medical, psychological, legal,
-      or financial advice. Each individual's path is unique, and readers are
-      encouraged to exercise their own discernment and seek appropriate
-      professional guidance when necessary.
-    </p>
 <?php 
   echo ".<br>Last Modified (on the server side): ".strftime('%c',filemtime($_SERVER['SCRIPT_FILENAME'])) . " GMT<br>";
 ?>
@@ -503,13 +406,12 @@ if (!empty($note['description']))
     <?php endif; ?>
 
 <div style="margin-top: 40px; margin-bottom: 20px; text-align: center;">
-        <hr style="border: 0; border-top: 1px solid #162447; margin-bottom: 20px;">
-        <br><img src="/media/Tarot.5.png" width: 50%>
-        <br>Above: New Layout: 5 card Self Assesment and Potential
-<br>
-        <a href="/i-ching" class="nav-link">Do an I Ching Consultation</a>
-        <span style="color: #666; margin: 0 15px;">|</span>
-        <a href="/" class="nav-link">Go to the main page of the website</a>
+  <hr style="border: 0; border-top: 1px solid #162447; margin-bottom: 20px;">
+  <br><center><img src="/media/Tarot.5.png" width="50%"></center>
+  <p>Above: New Layout: 5 card Self Assessment and Potential </p>
+  <a class="nav-link" `href="/i-ching" class="nav-link">Do an I Ching Consultation</a>
+  <span style="color: #666; margin: 0 15px;">|</span>
+  <a class="nav-link" href="/" class="nav-link">Go to the main page of the website</a>
     </div>
 
     <style>
