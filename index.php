@@ -10,6 +10,7 @@ $spreads = [
     'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
     'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
     'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
+    '5 card Self Assesment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
     'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
 ];
 $position_labels = [
@@ -227,13 +228,26 @@ $card_orientations =
   echo "The time is " . $currentDate . " GMT";
 ?>
 
-<p>Welcome to the beta release of our Tarot application! This project is the result of a unique, collaborative effort between a two-person team: myself and ChatGPT.</p>
-<p>Operating on a self-hosted LAMP stack, this application came to life through a dynamic, back-and-forth partnership. While I managed the system environment and project direction, ChatGPT did the vast majority of the heavy lifting for the PHP and HTML coding.</p>
-<p>Our development process was truly iterative. Together, we established a GitHub repository to track our progress, write, debug, and test the code. There were brilliant moments where ChatGPT delivered flawless, production-ready code on the very first try. There were also plenty of times where I caught bugs in its logic, reported them back, and watched it pivot to find a fix. We spent weeks complimenting each other's breakthroughs and untangling complex problems.</p>
-<p>At one point, after deploying a particularly exciting enhancement, I sent a screenshot of the new feature to my AI partner with a message that perfectly captures the spirit of this project:</p>
-<p>"Congratulations to the non-sentient member of the two-person team using a GitHub repository to write, debug, and test this code."</p>
-<p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it!</p>
-
+<p>Welcome to the beta release of our Tarot application. This project is the
+result of a unique, collaborative effort between a two-person team of me and ChatGPT.</p>
+<p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it.</p>
+<center>
+<a class="nav-link" href="/docs/tarot_overview.php" target=_blank>Tarot Deck: High-Level Outline</a>
+<hr>
+<table border=1>
+<tr>
+<th>Card Numbers</th><th>Location in the database Tarot 78-card Deck</th>
+</tr>
+<tr>
+<td align=center>1–14</td><td align=center>Cups</td></tr>
+<td align=center>15–28</td><td align=center>Wands Ace -> King</td></tr>
+<td align=center>29–42</td><td align=center>Swords</td></tr>
+<td align=center>43–56</td><td align=center>Pentacles</td></tr>
+<td align=center>57–78</td><td align=center>Major Arcana in Fool-to-World order</td>
+</tr>
+</table>
+</center>
+<br>
     <form method="POST" action="">
         <label for="question">Focus your mind and enter your question:</label>
         <input type="text" id="question" name="question" value="<?php echo htmlspecialchars($question); ?>" required placeholder="e.g., What does my career path look like this month?">
@@ -389,7 +403,6 @@ if (!empty($note['description']))
 <br><a href="/i-ching">Do an I Ching Consultation</a>
 <br><a href="/">Go to the Main Page</a>
 <center>
-<img src=tarot.png>
 </center>
     <h2 data-path-to-node="4">The Art of Inquiry: How to Consult the Tarot</h2>
     <p data-path-to-node="5">Welcome to this sacred space of reflection. The
@@ -491,6 +504,9 @@ if (!empty($note['description']))
 
 <div style="margin-top: 40px; margin-bottom: 20px; text-align: center;">
         <hr style="border: 0; border-top: 1px solid #162447; margin-bottom: 20px;">
+        <br><img src="/media/Tarot.5.png" width: 50%>
+        <br>Above: New Layout: 5 card Self Assesment and Potential
+<br>
         <a href="/i-ching" class="nav-link">Do an I Ching Consultation</a>
         <span style="color: #666; margin: 0 15px;">|</span>
         <a href="/" class="nav-link">Go to the main page of the website</a>

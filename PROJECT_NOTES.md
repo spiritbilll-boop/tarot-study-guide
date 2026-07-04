@@ -1,5 +1,14 @@
 # Tarot Study Guide CMS
 
+Card Numbering
+==============
+
+  1-14 = Cups, 
+  15-28 = Wands (Ace low to King high, 
+  29-42 = Swords,
+  43-56 = Pentacles
+  57-78 = Major Arcana in Fool-to-World order
+
 Reader Modernization
 ====================
 
@@ -24,6 +33,7 @@ reinforce its role as a scholarly knowledge
 base and to improve readability of long-form study notes.
 
 Current Status
+==============
 
 Working on the Delete feature for Study Notes.
 
@@ -37,7 +47,7 @@ Completed
 * Edit Mode
 * Cancel Edit
 
-Next
+Next Steps
 
 * Complete Delete
 * Dashboard

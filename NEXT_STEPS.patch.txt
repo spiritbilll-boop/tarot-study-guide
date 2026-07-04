@@ -1,0 +1,16 @@
+Next implementation:
+
+editor.php
+-----------
+Compute previous_card_id and next_card_id.
+Handle GET for navigation only.
+Handle POST only for save/update.
+
+editor_form.php
+---------------
+Replace single form with:
+
+<form method="get"> ... navigation ... </form>
+
+<form method="post"> ... editing ... </form>
+

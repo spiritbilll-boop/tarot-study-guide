@@ -59,6 +59,88 @@ input[type=text]
 <h1>
 Study Notes Manager
 </h1>
+
+<h2>
+<p>
+
+<?php
+
+if ($previous_card_id != $card_id)
+{
+
+?>
+
+<a href="?card_id=<?php
+echo $previous_card_id;
+?>&orientation=<?php
+echo $orientation;
+?>">
+&laquo; Previous Card
+</a>
+
+<?php
+
+}
+else
+{
+
+?>
+
+&laquo; Previous Card
+
+<?php
+
+}
+
+?>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php
+
+if ($next_card_id != $card_id)
+{
+
+?>
+
+<a href="?card_id=<?php
+echo $next_card_id;
+?>&orientation=<?php
+echo $orientation;
+?>">
+Next Card &raquo;
+</a>
+
+<?php
+
+}
+else
+{
+
+?>
+
+Next Card &raquo;
+
+<?php
+
+}
+
+?>
+
+</p>
+<?php
+echo
+    h($current_card_name)
+    .
+    " &mdash; "
+    .
+    (
+        $orientation == "U"
+            ? "Upright"
+            : "Reversed"
+    );
+?>
+</h2>
 <?php
 
 $is_edit =
@@ -100,37 +182,33 @@ if ($message != "")
 ?>
 
 <p class="message">
-
 <?php echo h($message); ?>
-
 </p>
 
 <?php
-
 }
 
 ?>
 
+<p>
+<b>Next Sequence:</b>
+<?php echo $next_sequence; ?>
+</p>
+
+</p>
 <form
 method="post"
 action="">
 
 <table>
-
 <tr>
-
 <td>
-
 <b>Card</b>
-
 </td>
-
 <td>
-
 <select
 name="card_id"
 onchange="this.form.submit()">
-
 <?php
 
 foreach ($cards as $card)
@@ -232,14 +310,9 @@ Reversed
 
 <hr>
 <p>
-<b>
-Next Sequence:
-</b>
-<?php echo $next_sequence; ?>
-</p>
 
 <h2>
-<?php echo $form_title; ?>
+<?php echo h($form_title); ?>
 </h2>
 
 <?php
@@ -257,19 +330,15 @@ else
 <table class="notes-table">
 
 <tr>
-<th>
-Seq
-</th>
-<th>
-Title
-</th>
-<th>
-Action
-</th>
+<th>Seq</th>
+<th>Title</th>
+<th>Action</th>
+</tr>
 <?php
 foreach ($notes as $note)
 {
 ?>
+
 <tr>
 <td>
 <?php echo $note['sequence_no']; ?>
@@ -277,7 +346,6 @@ foreach ($notes as $note)
 <td>
 <?php echo h($note['title']); ?>
 </td>
-
 <td>
 <a href="?card_id=<?php
 echo $card_id;
@@ -288,9 +356,20 @@ echo $note['id'];
 ?>">
 Edit
 </a>
+&nbsp;|&nbsp;
+<a
+href="?card_id=<?php
+echo $card_id;
+?>&orientation=<?php
+echo $orientation;
+?>&delete=<?php
+echo $note['id'];
+?>"
+onclick="return confirm('Delete this Study Note?');">
+Delete
+</a>
 </td>
 </tr>
-
 <?php
 }
 ?>
@@ -300,7 +379,10 @@ Edit
 ?>
 <hr>
 <h2>
-New Study Note
+<b>
+Next Sequence:
+</b>
+<?php echo h($form_title); ?>
 </h2>
 <table>
 <tr>
@@ -339,9 +421,7 @@ rows="8"><?php echo h($description_value); ?></textarea>
 <tr>
 
 <td>
-
 Source
-
 </td>
 
 <td>
@@ -382,33 +462,36 @@ type="checkbox"
 name="enabled"
 <?php if ($enabled_value) echo "checked"; ?>
 >
-
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 &nbsp;
-
 </td>
-
 <td>
 
 <input
 type="submit"
 value="<?php echo $button_text; ?>">
 
+<?php
+if ($is_edit)
+{
+?>
+<input
+type="button"
+value="Cancel"
+onclick="window.location='?card_id=<?php
+echo $card_id;
+?>&orientation=<?php
+echo $orientation;
+?>';">
+<?php
+}
+?>
 </td>
-
 </tr>
-
 </table>
-
 </form>
-
 </body>
-
 </html>
