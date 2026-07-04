@@ -137,7 +137,7 @@ echo
     (
         $orientation == "U"
             ? "Upright"
-            : "Reversed"
+            : "Reversed (Inverted)"
     );
 ?>
 </h2>
@@ -196,16 +196,15 @@ if ($message != "")
 </p>
 
 </p>
-<form
-method="post"
-action="">
+
+<form method="post" action="">
 
 <table>
+
 <tr>
+<td><b>Card</b></td>
 <td>
-<b>Card</b>
-</td>
-<td>
+
 <select
 name="card_id"
 onchange="this.form.submit()">
@@ -298,7 +297,7 @@ if ($orientation == "R")
 
 onchange="this.form.submit()">
 
-Reversed
+Reversed/Inverted
 
 </label>
 

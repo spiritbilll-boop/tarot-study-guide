@@ -6,7 +6,6 @@ Controller
 ============================================================
 */
 require_once __DIR__ . '/../common/db.php';
-require_once(__DIR__ . "/common.php");
 /*
 ============================================================
 
@@ -82,6 +81,9 @@ Handle Save
 */
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
     $title =
         trim($_POST['title']);
     $description =

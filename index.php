@@ -372,7 +372,7 @@ if (!empty($note['description']))
 ?>
 <div style="margin-bottom:12px;">
 <em>
-<?php echo h($note['description']); ?>
+<?php echo nl2br(h($note['description'])); ?>
 </em>
 </div>
 <?php
