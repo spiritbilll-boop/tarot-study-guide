@@ -92,7 +92,10 @@ if ($delete_id > 0)
 Handle Save
 ============================================================
 */
-if ($_SERVER['REQUEST_METHOD'] == "POST")
+if (
+    $_SERVER['REQUEST_METHOD'] == "POST"
+    && isset($_POST['save'])
+)
 {
     $title =
         trim($_POST['title']);

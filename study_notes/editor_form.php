@@ -2,6 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8">
+<?php if ($is_edit): ?>
+<input
+type="hidden"
+name="edit_id"
+value="<?php echo $edit_id; ?>">
+<?php endif; ?>
 <title>
 Study Notes Manager
 </title>
