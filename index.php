@@ -124,27 +124,27 @@ $card_orientations =
         $orientation_codes
     );
     // Save to database
-    $stmt = $conn->prepare(
-    "INSERT INTO tarot_readings
-    (user_question,
-    reading_type,
-    card_ids,
-    card_orientations)
-    VALUES (?, ?, ?, ?)"
-    );
-    
-    $card_ids = implode(',', $drawn_ids);
-    
-    $stmt->bind_param(
-    "ssss",
-    $question,
-    $selected_spread,
-    $card_ids,
-    $card_orientations
-    );
-    
-    $stmt->execute();
-    $stmt->close();
+//    $stmt = $conn->prepare(
+//    "INSERT INTO tarot_readings
+//    (user_question,
+//    reading_type,
+//    card_ids,
+//    card_orientations)
+//    VALUES (?, ?, ?, ?)"
+//    );
+//    
+//    $card_ids = implode(',', $drawn_ids);
+//    
+//    $stmt->bind_param(
+//    "ssss",
+//    $question,
+//    $selected_spread,
+//    $card_ids,
+//    $card_orientations
+//    );
+//    
+//    $stmt->execute();
+//    $stmt->close();
 }
 ?>
 
