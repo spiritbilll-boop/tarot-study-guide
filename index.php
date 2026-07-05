@@ -239,6 +239,24 @@ $card_orientations =
 <p>Welcome to the beta release of our Tarot application. This project is the
 result of a unique, collaborative effort between a two-person team of me and ChatGPT.</p>
 <p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it.</p>
+<center>
+<table border=1>
+<tr>
+  <th>Section of the Tarot Deck</th><th>Card Number range</th>
+</tr>
+<tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=major" target=_blank>Major Arcana in Fool-to-World order</td></a><td>57-78</td>
+</tr>
+<tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=cups" target=_blank>Cups (Alchemical element Water)</a></td><td>1-14</td>
+</tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=wands" target=_blank>Wands, Ace through King (Alchemical element Fire)</a></td><td>15-28</td>
+<tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=swords" target=_blank>Swords (Alchemical element Air)</a></td><td>29-42</td>
+</tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=pentacles" target=_blank>Pentacles (Alchemical element Earth)</a></td><td>43-56</td>
+</table>
+</center>
 <a class="nav-link" href="/docs/tarot_overview.php" target=_blank>Tarot Deck: High-Level Outline</a>
 <hr>
 
@@ -393,10 +411,6 @@ if (!empty($note['description']))
     </div>
             <?php endforeach; ?>
         </div>
-
-<br>
-<br><a href="/i-ching">Do an I Ching Consultation</a>
-<br><a href="/">Go to the Main Page</a>
 <center>
 <?php 
   echo ".<br>Last Modified (on the server side): ".strftime('%c',filemtime($_SERVER['SCRIPT_FILENAME'])) . " GMT<br>";
@@ -405,27 +419,25 @@ if (!empty($note['description']))
 
     <?php endif; ?>
 
-<div style="margin-top: 40px; margin-bottom: 20px; text-align: center;">
-  <hr style="border: 0; border-top: 1px solid #162447; margin-bottom: 20px;">
-  <br><center><img src="/media/Tarot.5.png" width="50%"></center>
-  <p>Above: New Layout: 5 card Self Assessment and Potential </p>
-  <a class="nav-link" `href="/i-ching" class="nav-link">Do an I Ching Consultation</a>
-  <span style="color: #666; margin: 0 15px;">|</span>
-  <a class="nav-link" href="/" class="nav-link">Go to the main page of the website</a>
-    </div>
+<style>
+  .nav-link {
+     color: #e43f5a;
+     text-decoration: none;
+     font-size: 16px;
+     font-weight: bold;
+     transition: color 0.2s ease;
+   }
+   .nav-link:hover {
+     color: #ff4a68;
+     text-decoration: underline;
+     }
+</style>
 
-    <style>
-        .nav-link {
-            color: #e43f5a;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            transition: color 0.2s ease;
-        }
-        .nav-link:hover {
-            color: #ff4a68;
-            text-decoration: underline;
-        }
-    </style>
+<div style="margin-top: 40px; margin-bottom: 20px;">
+  <p><a href="/i-ching"><font color=ffff00>Do an I Ching Consultation</a></p>
+  <p><a href="/"><font color=ffff00>Go to the Main Page</a></p>
+  <p><center><img src="/media/Tarot.5.png" width="50%"></center>
+  <p>Above: New Layout: 5 card Self Assessment and Potential </p>
+</div>
 </body>
 </html>

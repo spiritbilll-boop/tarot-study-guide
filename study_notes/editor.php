@@ -15,13 +15,22 @@ Defaults
 */
 $message = "";
 $card_id =
-    isset($_REQUEST['card_id'])
-        ? intval($_REQUEST['card_id'])
-        : 1;
+    isset($_GET['card_id'])
+        ? intval($_GET['card_id'])
+        : (
+            isset($_POST['card_id'])
+                ? intval($_POST['card_id'])
+                : 1
+          );
+
 $orientation =
-    isset($_REQUEST['orientation'])
-        ? $_REQUEST['orientation']
-        : "U";
+    isset($_GET['orientation'])
+        ? $_GET['orientation']
+        : (
+            isset($_POST['orientation'])
+                ? $_POST['orientation']
+                : "U"
+          );
 /*
 ============================================================
 
@@ -33,7 +42,11 @@ Edit Mode
 $edit_id =
     isset($_GET['edit'])
         ? intval($_GET['edit'])
-        : 0;
+        : (
+            isset($_POST['edit_id'])
+                ? intval($_POST['edit_id'])
+                : 0
+          );
 
 $edit_note = null;
 
@@ -81,9 +94,6 @@ Handle Save
 */
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
     $title =
         trim($_POST['title']);
     $description =
