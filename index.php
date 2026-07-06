@@ -316,17 +316,6 @@ ID=<?php echo $card['id']; ?><br>
     <?php echo $card['is_reversed'] ? '(Reversed)' : '(Upright)'; ?>
 </h4>
 
-<?php
-if (!empty($note['notes']))
-{
-?>
-<p>
-<?php echo nl2br(h($note['notes'])); ?>
-</p>
-<?php
-}
-?>
-
 
 <?php
 $study_notes =
