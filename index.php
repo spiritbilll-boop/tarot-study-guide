@@ -323,16 +323,48 @@ ID=<?php echo $card['id']; ?><br>
 </h4>
 
 <?php
-if (!empty($note['notes']))
+
+$meaning =
+    $card['is_reversed']
+        ? $card['meaning_reversed']
+        : $card['meaning_upright'];
+
+if (!empty($meaning))
 {
 ?>
-<p>
-<?php echo nl2br(h($note['notes'])); ?>
+
+<div style="
+    margin-top:15px;
+    margin-bottom:20px;
+    padding:15px;
+    background:#eef4ff;
+    border-left:6px solid #4b6cb7;
+    border-radius:8px;
+    text-align:left;
+">
+
+<strong style="color:#000;">
+
+Card Meaning
+
+</strong>
+
+<p style="
+    color:#222;
+    font-size:18px;
+    line-height:1.6;
+    margin-top:10px;
+">
+
+<?php echo nl2br(h($meaning)); ?>
+
 </p>
+
+</div>
+
 <?php
 }
 ?>
-
 
 <?php
 $study_notes =
