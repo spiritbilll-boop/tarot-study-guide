@@ -263,10 +263,8 @@ result of a unique, collaborative effort between a two-person team of me and Cha
 <br>
 <?php include __DIR__ . '/includes/spread_selector.php'; ?>
 
-    <?php if (!empty($reading_results)): ?>
-        <hr>
-        <h2>Your Reading: <?php echo htmlspecialchars($spreads[$selected_spread]['label']); ?></h2>
-        <p><strong>Your Question:</strong> "<?php echo htmlspecialchars($question); ?>"</p>
+<?php if (!empty($reading_results)): ?>
+<?php include __DIR__ . '/includes/reading_header.php'; ?>
         
         <div class="card-container">
 <?php foreach ($reading_results as $index => $card): ?>
