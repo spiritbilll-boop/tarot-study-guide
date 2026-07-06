@@ -181,6 +181,21 @@ $card_orientations =
         input[type="text"], select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: none; }
         button { background: #1a1a2e; color: teal; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 24px; }
         button:hover { background: #ff4a68; }
+.card-link
+{
+    color:#1d3557;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+.card-link:hover
+{
+    color:#4b6cb7;
+
+    text-decoration:underline;
+}
 </style>
 </head>
 <body>
@@ -318,8 +333,17 @@ ID=<?php echo $card['id']; ?><br>
 </p>
 
 <h4>
-    <?php echo htmlspecialchars($card['card_name']); ?>
-    <?php echo $card['is_reversed'] ? '(Reversed)' : '(Upright)'; ?>
+
+<a
+class="card-link"
+href="card.php?id=<?php echo $card['id']; ?>">
+
+<?php echo htmlspecialchars($card['card_name']); ?>
+
+</a>
+
+<?php echo $card['is_reversed'] ? ' (Reversed)' : ' (Upright)'; ?>
+
 </h4>
 
 <?php
