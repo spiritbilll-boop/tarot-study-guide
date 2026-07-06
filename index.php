@@ -9,6 +9,7 @@ require_once __DIR__ . '/common/db.php';
 $spreads = [
     'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
     'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
+    'bms_three'  => ['label' => 'Three Cards (Body, Mind, Spirit)', 'count' => 3],
     'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
     'five card Self Assessment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
     'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
@@ -23,6 +24,11 @@ $position_labels = [
         "Past",
         "Present",
         "Future"
+    ],
+    'bms_three' => [
+        "Body: What I need to work on for physical health and/or how to go about doing it",
+        "Mind: Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc",
+        "Spirit: Tells me what I need to work on in my spiritual practice"
     ],
 
     'five' => [
@@ -261,10 +267,27 @@ result of a unique, collaborative effort between a two-person team of me and Cha
 <hr>
 
 <br>
-<?php include __DIR__ . '/includes/spread_selector.php'; ?>
+    <form method="POST" action="">
+<center>
+        <label for="question">Focus your mind and enter your question:</label>
+        <input type="text" id="question" name="question" value="<?php echo htmlspecialchars($question); ?>" required placeholder="e.g., What does my career path look like this month?">
+        
+        <label for="spread_type">Choose Spread:</label>
+        <select id="spread_type" name="spread_type">
+            <?php foreach ($spreads as $key => $info): ?>
+                <option value="<?php echo $key; ?>" <?php echo ($selected_spread === $key) ? 'selected' : ''; ?>>
+                    <?php echo $info['label']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        
+        <button type="submit" name="draw">Draw Deck</button>
+    </form>
 
-<?php if (!empty($reading_results)): ?>
-<?php include __DIR__ . '/includes/reading_header.php'; ?>
+    <?php if (!empty($reading_results)): ?>
+        <hr>
+        <h2>Your Reading: <?php echo htmlspecialchars($spreads[$selected_spread]['label']); ?></h2>
+        <p><strong>Your Question:</strong> "<?php echo htmlspecialchars($question); ?>"</p>
         
         <div class="card-container">
 <?php foreach ($reading_results as $index => $card): ?>
@@ -298,37 +321,14 @@ ID=<?php echo $card['id']; ?><br>
     <?php echo htmlspecialchars($card['card_name']); ?>
     <?php echo $card['is_reversed'] ? '(Reversed)' : '(Upright)'; ?>
 </h4>
-<?php
-$meaning =
-    $card['is_reversed']
-        ? $card['meaning_reversed']
-        : $card['meaning_upright'];
 
-if (!empty($meaning))
+<?php
+if (!empty($note['notes']))
 {
 ?>
-<div style="
-    margin-top:15px;
-    margin-bottom:20px;
-    padding:15px;
-    background:#eef4ff;
-    border-left:6px solid #4b6cb7;
-    border-radius:8px;
-    text-align:left;
-">
-<strong style="color:#000;">
-    Card Meaning
-</strong>
-
-<p style="
-    color:#222;
-    font-size:18px;
-    line-height:1.6;
-    margin-top:10px;
-">
-    <?php echo nl2br(h($meaning)); ?>
+<p>
+<?php echo nl2br(h($note['notes'])); ?>
 </p>
-</div>
 <?php
 }
 ?>
