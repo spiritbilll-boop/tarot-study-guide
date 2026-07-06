@@ -6,7 +6,7 @@
  * Reusable statistics functions for the Tarot Study Guide.
  */
 
-require_once __DIR__ . '/db.php';
+//require_once __DIR__ . '/db.php';
 
 /*
  * Execute a query and return all rows.
