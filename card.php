@@ -191,10 +191,8 @@ h2
 
 .back-link
 {
-    color:#ffd966;
-
-    text-decoration:none;
-
+    color:#1d3557;
+    text-decoration:underline;
     font-weight:bold;
 }
 
@@ -286,6 +284,90 @@ echo htmlspecialchars(
     $card['card_name']
 );
 ?>">
+<div class="panel">
+
+<table
+style="
+width:100%;
+border-collapse:collapse;
+">
+
+<tr>
+
+<td
+style="text-align:left;">
+
+<?php
+
+if ($card_id > 1)
+{
+
+?>
+
+<a
+class="back-link"
+href="card.php?id=<?php
+echo $card_id - 1;
+?>">
+
+&larr;Previous Card
+
+</a>
+
+<?php
+
+}
+
+?>
+
+</td>
+
+<td
+style="text-align:center;">
+
+<a
+class="back-link"
+href="index.php">
+
+Return to Reader
+
+</a>
+
+</td>
+
+<td
+style="text-align:right;">
+
+<?php
+
+if ($card_id < 78)
+{
+
+?>
+
+<a
+class="back-link"
+href="card.php?id=<?php
+echo $card_id + 1;
+?>">
+
+Next Card&rarr;
+
+</a>
+
+<?php
+
+}
+
+?>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
 
 <div class="panel">
 
