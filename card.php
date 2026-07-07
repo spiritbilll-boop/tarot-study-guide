@@ -157,10 +157,6 @@ if ($card_id < 78)
 
     $stmt->close();
 }
-echo "<pre>";
-echo "Previous = [" . $previous_card_name . "]\n";
-echo "Next     = [" . $next_card_name . "]\n";
-echo "</pre>";
 /*
 ------------------------------------------------------------
 Load Study Notes
@@ -746,7 +742,19 @@ href="card.php?id=<?php
 echo $card_id - 1;
 ?>">
 
-? Previous Card
+&larr; Previous Card
+
+<br>
+
+<span class="nav-card-name">
+
+<?php
+echo htmlspecialchars(
+    $previous_card_name
+);
+?>
+
+</span>
 
 </a>
 
@@ -787,7 +795,19 @@ href="card.php?id=<?php
 echo $card_id + 1;
 ?>">
 
-Next Card ?
+Next Card &rarr;
+
+<br>
+
+<span class="nav-card-name">
+
+<?php
+echo htmlspecialchars(
+    $next_card_name
+);
+?>
+
+</span>
 
 </a>
 
