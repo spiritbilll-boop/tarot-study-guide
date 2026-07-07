@@ -95,7 +95,72 @@ if (!$card)
         "Unknown card."
     );
 }
+/*
+------------------------------------------------------------
+Load Previous / Next Card Names
+------------------------------------------------------------
+*/
 
+$previous_card_name = '';
+$next_card_name = '';
+
+if ($card_id > 1)
+{
+    $stmt =
+        $conn->prepare(
+            "SELECT card_name
+             FROM tarot_cards
+             WHERE id = ?"
+        );
+
+    $previous_id = $card_id - 1;
+
+    $stmt->bind_param(
+        "i",
+        $previous_id
+    );
+
+    $stmt->execute();
+
+    $stmt->bind_result(
+        $previous_card_name
+    );
+
+    $stmt->fetch();
+
+    $stmt->close();
+}
+
+if ($card_id < 78)
+{
+    $stmt =
+        $conn->prepare(
+            "SELECT card_name
+             FROM tarot_cards
+             WHERE id = ?"
+        );
+
+    $next_id = $card_id + 1;
+
+    $stmt->bind_param(
+        "i",
+        $next_id
+    );
+
+    $stmt->execute();
+
+    $stmt->bind_result(
+        $next_card_name
+    );
+
+    $stmt->fetch();
+
+    $stmt->close();
+}
+echo "<pre>";
+echo "Previous = [" . $previous_card_name . "]\n";
+echo "Next     = [" . $next_card_name . "]\n";
+echo "</pre>";
 /*
 ------------------------------------------------------------
 Load Study Notes
@@ -240,6 +305,18 @@ h2
 
     text-align:right;
 }
+.nav-card-name
+{
+    display:block;
+
+    margin-top:6px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#1d3557;
+}
 
 </style>
 
@@ -295,7 +372,7 @@ border-collapse:collapse;
 <tr>
 
 <td
-style="text-align:left;">
+style="text-align:left; vertical-align:top;">
 
 <?php
 
@@ -312,7 +389,17 @@ echo $card_id - 1;
 
 &larr;Previous Card
 
-</a>
+<br>
+
+<span class="nav-card-name">
+
+<?php
+echo htmlspecialchars(
+  $previous_card_name
+);
+?>
+
+</span>
 
 <?php
 
@@ -336,7 +423,7 @@ Return to Reader
 </td>
 
 <td
-style="text-align:right;">
+style="text-align:right; vertical-align:top;">
 
 <?php
 
@@ -351,7 +438,19 @@ href="card.php?id=<?php
 echo $card_id + 1;
 ?>">
 
-Next Card&rarr;
+Next Card &rarr;
+
+<br>
+
+<span class="nav-card-name">
+
+<?php
+echo htmlspecialchars(
+    $next_card_name
+);
+?>
+
+</span>
 
 </a>
 
@@ -673,7 +772,7 @@ Return to Reader
 </td>
 
 <td
-style="text-align:right;">
+style="text-align:right; vertical-align:top;"
 
 <?php
 
