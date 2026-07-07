@@ -780,7 +780,7 @@ Return to Reader
 </td>
 
 <td
-style="text-align:right; vertical-align:top;"
+style="text-align:right; vertical-align:top;">
 
 <?php
 
