@@ -498,8 +498,6 @@ if (!empty($note['description']))
 <div style="margin-top: 40px; margin-bottom: 20px;">
   <p><a href="/i-ching"><font color=ffff00>Do an I Ching Consultation</a></p>
   <p><a href="/"><font color=ffff00>Go to the Main Page</a></p>
-  <p><center><img src="/media/Tarot.5.png" width="50%"></center>
-  <p>Above: New Layout: 5 card Self Assessment and Potential </p>
 </div>
 </body>
 </html>
