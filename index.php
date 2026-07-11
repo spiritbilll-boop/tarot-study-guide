@@ -278,7 +278,7 @@ result of a unique, collaborative effort between a two-person team of me and Cha
   <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=pentacles" target=_blank>Pentacles (Alchemical element Earth)</a></td><td>43-56</td>
 </table>
 </center>
-<a class="nav-link" href="/docs/tarot_overview.php" target=_blank>Tarot Deck: High-Level Outline</a>
+<a class="nav-link" href="tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a>
 <hr>
 
 <br>
