@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ii", $entity_id, $topic_id);
 
         if ($stmt->execute()) {
-            $message = "Topic added.";
+            $stmt2=$conn->prepare("SELECT name FROM topics WHERE id=?");$stmt2->bind_param("i",$topic_id);$stmt2->execute();$stmt2->bind_result($topic_name);$stmt2->fetch();$stmt2->close();$message="Added topic: ".$topic_name;
         } else {
             $message = "Error: " . $stmt->error;
         }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ii", $entity_id, $topic_id);
 
         if ($stmt->execute()) {
-            $message = "Topic removed.";
+            $stmt2=$conn->prepare("SELECT name FROM topics WHERE id=?");$stmt2->bind_param("i",$topic_id);$stmt2->execute();$stmt2->bind_result($topic_name);$stmt2->fetch();$stmt2->close();$message="Removed topic: ".$topic_name;
         } else {
             $message = "Error: " . $stmt->error;
         }
@@ -66,7 +66,7 @@ $stmt = $conn->prepare(
    LEFT JOIN domains d
      ON d.id = t.domain_id
   WHERE et.entity_id = ?
-  ORDER BY d.display_order, t.display_order, t.name"
+  ORDER BY d.name, t.name"
 );
 $stmt->bind_param("i", $entity_id);
 $stmt->execute();
@@ -75,6 +75,8 @@ while($row = $res->fetch_assoc()){
     $currentTopics[] = $row;
 }
 $stmt->close();
+//$availableTopicCount = count($availableTopics);
+$currentTopicCount = count($currentTopics);
 
 $availableTopics = [];
 $stmt = $conn->prepare(
@@ -91,7 +93,7 @@ $stmt = $conn->prepare(
          WHERE et.entity_id=?
            AND et.topic_id=t.id
     )
-  ORDER BY d.display_order,t.display_order,t.name"
+  ORDER BY d.name, t.name"
 );
 $stmt->bind_param("i",$entity_id);
 $stmt->execute();
@@ -141,17 +143,17 @@ select{min-width:420px}
 </form>
 
 <div class="section">
-<h2>Current Topics</h2>
+<h2>Current Topics (<?= $currentTopicCount ?>)</h2>
 
 <?php if(empty($currentTopics)): ?>
 <p><em>No topics assigned.</em></p>
 <?php else: ?>
 <table>
-<tr><th>Topic</th><th>Domain</th><th>Action</th></tr>
+<tr><th>Domain</th><th>Topic</th><th>Action</th></tr>
 <?php foreach($currentTopics as $topic): ?>
 <tr>
-<td><?= htmlspecialchars($topic['name']) ?></td>
 <td><?= htmlspecialchars($topic['domain_name']) ?></td>
+<td><?= htmlspecialchars($topic['name']) ?></td>
 <td>
 <form method="post" class="inline">
 <input type="hidden" name="entity_id" value="<?= $entity_id ?>">
@@ -167,7 +169,7 @@ onclick="return confirm('Remove topic?');">
 </div>
 
 <div class="section">
-<h2>Add Topic</h2>
+<h2>Add Topic (<?= $availableTopicCount ?> available)</h2>
 
 <form method="post">
 <input type="hidden" name="entity_id" value="<?= $entity_id ?>">
