@@ -1,161 +1,86 @@
-<?php
-
-/*
-============================================================
-
-Tarot Study Guide
-
-Knowledge Graph
-
-Topics by Domain
-
-============================================================
-*/
-
-require_once __DIR__ . '/../common/db.php';
-
-$sql = "
-
-SELECT
-    d.id             AS domain_id,
-    d.name           AS domain,
-    d.display_order  AS domain_display_order,
-    t.id             AS topic_id,
-    t.name           AS topic,
-    t.display_order  AS topic_display_order
-FROM domains d
-JOIN topics t
-    ON t.domain_id = d.id
-WHERE d.enabled = 1
-  AND t.enabled = 1
-ORDER BY
-    d.name,
-    t.name;
-
-";
-
-$result = $conn->query($sql);
-
-if (!$result)
-{
-    die("Query failed: " . $conn->error);
-}
-
-?>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="utf-8">
-
-<title>Knowledge Graph - Topics by Domain</title>
-
+<title>Knowledge Graph Explorer</title>
 <link rel="stylesheet" href="../style.css">
-
 <style>
-
-table
+body
 {
-    border-collapse: collapse;
-    width: 100%;
+    font-family: Arial, sans-serif;
+    margin: 20px;
 }
 
-th,
-td
+h2
 {
-    border: 1px solid #808080;
-    padding: 8px;
-    text-align: left;
+    margin-top: 30px;
 }
 
-th
+ul
 {
-    background: #e8e8e8;
-}
-
-tr:nth-child(even)
-{
-    background: #f7f7f7;
-}
-
-.footer
-{
-    margin-top: 20px;
-    font-style: italic;
+    line-height: 1.8;
 }
 
 </style>
-
 </head>
-
 <body>
-
-<h1>Knowledge Graph</h1>
-
-<h2>Topics by Domain</h2>
-
+<h1>Knowledge Graph Explorer</h1>
 <p>
-
-<a href="../index.php">
-
-Return to Main Menu
-
+Explore the Tarot Study Guide knowledge graph from several different perspectives.
+</p>
+<hr>
+<h2>Browse</h2>
+<ul>
+<li>
+<a href="topics_by_domain.php">
+Topics by Domain
 </a>
+</li>
+<li>
+<a href="cards_by_topic.php">
+Cards by Topic
+</a>
+</li>
 
+<li>
+<a href="topics_by_card.php">
+Topics by Card
+</a>
+</li>
+</ul>
+
+<h2>Reports</h2>
+<ul>
+
+<!--
+<li><a href="entity_topics_report.php">Entity Topics Report</a></li>
+
+<li><a href="cards_with_no_topics.php">Cards with No Topics</a></li>
+
+<li><a href="unused_topics.php">Unused Topics</a></li>
+
+<li><a href="domain_summary.php">Domain Summary</a></li>
+
+<li><a href="knowledge_graph_completeness.php">Knowledge Graph Completeness</a></li>
+
+<li><a href="discover_similar_cards.php">Discover Similar Cards</a></li>
+-->
+
+</ul>
+
+<h2>Administration</h2>
+<ul>
+<li>
+<a href="../entity_topics/index.php">
+Entity Topics Manager
+</a>
+</li>
+</ul>
+<hr>
+<p>
+<a href="../index.php">
+Return to Main Menu
+</a>
 </p>
-
-<table>
-
-<tr>
-
-<th>Domain</th>
-
-<th>Topic</th>
-
-<th>Domain ID</th>
-
-<th>Topic ID</th>
-
-</tr>
-
-<?php
-
-$count = 0;
-
-while ($row = $result->fetch_assoc())
-{
-
-    $count++;
-
-?>
-
-<tr>
-
-<td><?= htmlspecialchars($row['domain']) ?></td>
-
-<td><?= htmlspecialchars($row['topic']) ?></td>
-
-<td><?= htmlspecialchars($row['domain_id']) ?></td>
-
-<td><?= htmlspecialchars($row['topic_id']) ?></td>
-
-</tr>
-<?php
-
-}
-
-?>
-
-</table>
-
-<p class="footer">
-
-<?= $count ?> rows returned.
-
-</p>
-
 </body>
-
 </html>
