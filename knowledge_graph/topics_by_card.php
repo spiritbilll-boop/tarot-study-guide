@@ -122,10 +122,17 @@ Return to Main Menu
 
 <tr>
 
-<td><?= $row['card_id'] ?></td>
+<td>
+<a href="../card.php?id=<?= $row['card_id'] ?>">
+<?= $row['card_id'] ?>
+</a>
+</td>
 
-<td><?= htmlspecialchars($row['card_name']) ?></td>
-
+<td>
+<a href="../card.php?id=<?= $row['card_id'] ?>">
+<?= htmlspecialchars($row['card_name']) ?>
+</a>
+</td>
 <td><?= htmlspecialchars($row['domain']) ?></td>
 
 <td><?= $row['topic_id'] ?></td>
