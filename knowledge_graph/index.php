@@ -59,21 +59,16 @@ Cards by Topic
 Topics by Card
 </a>
 </li>
-
 </ul>
 
 <h2>Reports</h2>
 
 <ul>
-
 <li>
 <a href="entity_topics_report.php">
 Entity Topics Report
 </a>
 </li>
-
-<!--
-
 <li>
 <a href="cards_with_no_topics.php">
 Cards with No Topics
@@ -85,6 +80,8 @@ Cards with No Topics
 Unused Topics
 </a>
 </li>
+
+<!--
 
 <li>
 <a href="domain_summary.php">
