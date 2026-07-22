@@ -4,10 +4,10 @@ require_once("../common/db.php");
 
 $sql = "
 SELECT
-    d.name AS domain,
-    COUNT(DISTINCT t.id) AS total_topics,
-    COUNT(DISTINCT et.topic_id) AS used_topics,
-    COUNT(DISTINCT et.entity_id) AS cards
+  d.name AS domain,
+  COUNT(DISTINCT t.id) AS total_topics,
+  COUNT(DISTINCT et.topic_id) AS used_topics,
+  COUNT(DISTINCT et.entity_id) AS cards
 FROM domains d
 LEFT JOIN topics t
     ON t.domain_id = d.id

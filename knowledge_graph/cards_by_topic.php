@@ -69,13 +69,13 @@ tr:nth-child(even){background:#f7f7f7}
 <td><?= htmlspecialchars($row['topic']) ?></td>
 <td><?= $row['topic_id'] ?></td>
 <td>
-<a href="../card.php?id=<?= $row['card_id'] ?>">
+<a href="card.php?id=<?= $row['card_id'] ?>">
 <?= $row['card_id'] ?>
 </a>
 </td>
 
 <td>
-<a href="../card.php?id=<?= $row['card_id'] ?>">
+<a href="card.php?id=<?= $row['card_id'] ?>">
 <?= htmlspecialchars($row['card_name']) ?>
 </a>
 </td>

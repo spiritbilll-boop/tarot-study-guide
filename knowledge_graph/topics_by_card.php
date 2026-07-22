@@ -123,13 +123,13 @@ Return to Main Menu
 <tr>
 
 <td>
-<a href="../card.php?id=<?= $row['card_id'] ?>">
+<a href="card.php?id=<?= $row['card_id'] ?>">
 <?= $row['card_id'] ?>
 </a>
 </td>
 
 <td>
-<a href="../card.php?id=<?= $row['card_id'] ?>">
+<a href="card.php?id=<?= $row['card_id'] ?>">
 <?= htmlspecialchars($row['card_name']) ?>
 </a>
 </td>

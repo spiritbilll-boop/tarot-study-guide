@@ -81,13 +81,13 @@ Unused Topics
 </a>
 </li>
 
-<!--
-
 <li>
 <a href="domain_summary.php">
 Domain Summary
 </a>
 </li>
+
+<!--
 
 <li>
 <a href="knowledge_graph_completeness.php">

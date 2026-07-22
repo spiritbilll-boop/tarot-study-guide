@@ -1,0 +1,5 @@
+1–14 = Cups,
+15–28 = Wands Ace-King,
+29–42 = Swords,
+43–56 = Pentacles"
+57–78 = Major Arcana in Fool-to-World order
