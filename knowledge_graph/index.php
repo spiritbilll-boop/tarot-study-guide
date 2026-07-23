@@ -43,12 +43,6 @@ Explore the Tarot Study Guide knowledge graph from several different perspective
 <ul>
 
 <li>
-<a href="topics_by_domain.php">
-Topics by Domain
-</a>
-</li>
-
-<li>
 <a href="cards_by_topic.php">
 Cards by Topic
 </a>
@@ -64,6 +58,12 @@ Topics by Card
 <h2>Reports</h2>
 
 <ul>
+<li>
+<a href="topics_by_domain.php">
+Topics by Domain
+</a>
+</li>
+
 <li>
 <a href="entity_topics_report.php">
 Entity Topics Report

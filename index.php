@@ -7,58 +7,58 @@ require_once __DIR__ . '/common/db.php';
 
 // 2. CONFIGURING SPREADS
 $spreads = [
-    'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
-    'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
-    'bms_three'  => ['label' => 'Three Cards (Body, Mind, Spirit)', 'count' => 3],
-    'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
-    'five card Self Assessment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
-    'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
+'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
+'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
+'bms_three'  => ['label' => 'Three Cards (Body, Mind, Spirit)', 'count' => 3],
+'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
+'five card Self Assessment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
+'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
 ];
 $position_labels = [
 
-    'single' => [
-        "Today's Guidance"
-    ],
+'single' => [
+"General Insight"
+],
 
-    'three' => [
-        "Past",
-        "Present",
-        "Future"
-    ],
-    'bms_three' => [
-        "Body: What I need to work on for physical health and/or how to go about doing it",
-        "Mind: Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc",
-        "Spirit: Tells me what I need to work on in my spiritual practice"
-    ],
+'three' => [
+"Past",
+"Present",
+"Future"
+],
+'bms_three' => [
+"Body: What I need to work on for physical health and/or how to go about doing it",
+"Mind: Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc",
+"Spirit: Tells me what I need to work on in my spiritual practice"
+],
 
-    'five' => [
-        "Situation",
-        "Obstacle",
-        "Past",
-        "Present",
-        "Future"
-    ],
+'five' => [
+"Situation",
+"Obstacle",
+"Past",
+"Present",
+"Future"
+],
 
-    'five card Self Assessment & Potential' => [
-        "My Best Qualities",
-        "My Gift To Others",
-        "What Brings me joy",
-        "Unrecognized Potential",
-        "How I Perceive Myself"
-    ],
+'five card Self Assessment & Potential' => [
+"My Best Qualities",
+"My Gift To Others",
+"What Brings me joy",
+"Unrecognized Potential",
+"How I Perceive Myself"
+],
 
-    'Celtic Cross' => [
-        "Current Situation",
-        "Obstacle",
-        "Goal",
-        "Past",
-        "Near Future",
-        "The Querent (current state)",
-        "The Querent (the Influences)",
-        "The Environment",
-        "Hopes and Fears",
-        "Final Outcome"
-    ]
+'Celtic Cross' => [
+"Current Situation",
+"Obstacle",
+"Goal",
+"Past",
+"Near Future",
+"The Querent (current state)",
+"The Querent (the Influences)",
+"The Environment",
+"Hopes and Fears",
+"Final Outcome"
+]
 
 ];
 
@@ -68,34 +68,34 @@ $selected_spread = 'single';
 
 // 3. HANDLE USER DRAW REQUEST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['draw'])) {
-    $question = trim($_POST['question'] ?? 'No question asked.');
-    $selected_spread = $_POST['spread_type'] ?? 'single';
-    
-    if (!array_key_exists($selected_spread, $spreads)) {
-        $selected_spread = 'single';
-    }
-    
-    $card_count = $spreads[$selected_spread]['count'];
-    
-    // Generate an array from 1 to 78, shuffle them, and pick the required amount
-    $deck = range(1, 78);
-    shuffle($deck);
-    $drawn_ids = array_slice($deck, 0, $card_count);
-    
-    
-    // Fetch the drawn card details from our database
-    // Using an array map to ensure all IDs are integers for security
+$question = trim($_POST['question'] ?? 'No question asked.');
+$selected_spread = $_POST['spread_type'] ?? 'single';
+
+if (!array_key_exists($selected_spread, $spreads)) {
+$selected_spread = 'single';
+}
+
+$card_count = $spreads[$selected_spread]['count'];
+
+// Generate an array from 1 to 78, shuffle them, and pick the required amount
+$deck = range(1, 78);
+shuffle($deck);
+$drawn_ids = array_slice($deck, 0, $card_count);
+
+
+// Fetch the drawn card details from our database
+// Using an array map to ensure all IDs are integers for security
 $in_clause = implode(',', array_fill(0, count($drawn_ids), '?'));
 
 $stmt = $conn->prepare(
-    "SELECT * FROM tarot_cards WHERE id IN ($in_clause)"
+"SELECT * FROM tarot_cards WHERE id IN ($in_clause)"
 );
 
 $types = str_repeat('i', count($drawn_ids));
 
 $stmt->bind_param(
-    $types,
-    ...$drawn_ids
+$types,
+...$drawn_ids
 );
 
 $stmt->execute();
@@ -105,52 +105,30 @@ $result = $stmt->get_result();
 $fetched_cards = $result->fetch_all(MYSQLI_ASSOC);
 
 $stmt->close();
-    
-    // Reorder fetched cards to match the original random draw sequence
-    $cards_by_id = [];
-    foreach ($fetched_cards as $card) {
-        $cards_by_id[$card['id']] = $card;
-    }
-    
-    foreach ($drawn_ids as $id) {
-        if (isset($cards_by_id[$id])) {
-            $card = $cards_by_id[$id];
-            // 50% chance for the card to be reversed
-            $card['is_reversed'] = (rand(0, 1) === 1); 
+
+// Reorder fetched cards to match the original random draw sequence
+$cards_by_id = [];
+foreach ($fetched_cards as $card) {
+$cards_by_id[$card['id']] = $card;
+}
+
+foreach ($drawn_ids as $id) {
+if (isset($cards_by_id[$id])) {
+    $card = $cards_by_id[$id];
+    // 50% chance for the card to be reversed
+    $card['is_reversed'] = (rand(0, 1) === 1); 
 $orientation_codes[] =
-    $card['is_reversed']
-        ? 'R'
-        : 'U';
-            $reading_results[] = $card;
-        }
-    }
+$card['is_reversed']
+? 'R'
+: 'U';
+    $reading_results[] = $card;
+}
+}
 $card_orientations =
-    implode(
-        ',',
-        $orientation_codes
-    );
-    // Save to database
-//    $stmt = $conn->prepare(
-//    "INSERT INTO tarot_readings
-//    (user_question,
-//    reading_type,
-//    card_ids,
-//    card_orientations)
-//    VALUES (?, ?, ?, ?)"
-//    );
-//    
-//    $card_ids = implode(',', $drawn_ids);
-//    
-//    $stmt->bind_param(
-//    "ssss",
-//    $question,
-//    $selected_spread,
-//    $card_ids,
-//    $card_orientations
-//    );
-//    
-//    $stmt->execute();
-//    $stmt->close();
+implode(
+',',
+$orientation_codes
+);
 }
 ?>
 
@@ -160,41 +138,41 @@ $card_orientations =
 <meta charset="UTF-8">
 <title>Tarot Card Reading</title>
 <style>
-  body { font-family: Times, serif; background: #1a1a2e; color: #fff; margin: 0 auto; padding: 20px;  text-align: center;}
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
+body { font-family: Times, serif; background: #1a1a2e; color: #fff; margin: 0 auto; padding: 20px;  text-align: center;}
+.card-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+margin-top: 30px;
 }
 
 .tarot-card {
-    background: #4264B9;
-    border: 2px solid #e43f5a;
-    padding: 15px;
-    border-radius: 8px;
+background: #4264B9;
+border: 2px solid #e43f5a;
+padding: 15px;
+border-radius: 8px;
 }
-        .tarot-card img { width: 600px; border-radius: 4px; }
-        .reversed { transform: rotate(180deg); }
-        form { background: #162447; padding: 20px; border-radius: 8px; display: inline-block; text-align: left; margin-bottom: 20px; }
-        input[type="text"], select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: none; }
-        button { background: #1a1a2e; color: teal; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 24px; }
-        button:hover { background: #ff4a68; }
+.tarot-card img { width: 600px; border-radius: 4px; }
+.reversed { transform: rotate(180deg); }
+form { background: #162447; padding: 20px; border-radius: 8px; display: inline-block; text-align: left; margin-bottom: 20px; }
+input[type="text"], select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: none; }
+button { background: #1a1a2e; color: teal; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 24px; }
+button:hover { background: #ff4a68; }
 .card-link
 {
-    color:#1d3557;
+color:#1d3557;
 
-    text-decoration:none;
+text-decoration:none;
 
-    font-weight:bold;
+font-weight:bold;
 }
 
 .card-link:hover
 {
-    color:#4b6cb7;
+color:#4b6cb7;
 
-    text-decoration:underline;
+text-decoration:underline;
 }
 </style>
 </head>
@@ -278,9 +256,12 @@ result of a unique, collaborative effort between a two-person team of me and Cha
   <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=pentacles" target=_blank>Pentacles (Alchemical element Earth)</a></td><td>43-56</td>
 </table>
 </center>
-<a class="nav-link" href="tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a>
-<hr>
-
+<p><a class="nav-link" href="/docs/tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a></p>
+<p><a class="nav-link" href="/docs/tarot_db.png" target=_blank>For RDBMS geeks: Entity-Relationship (ER) diagram</a></p>
+<h2>Documentation</h2>
+  <a  class="nav-link" href="/docs/tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a>
+  <br>
+  <a class="nav-link"href="/docs/tarot_db.png" target=_blank>Entity-Relationship Diagram</a>
 <br>
     <form method="POST" action="">
 <center>
@@ -301,9 +282,7 @@ result of a unique, collaborative effort between a two-person team of me and Cha
 
     <?php if (!empty($reading_results)): ?>
         <hr>
-        <h2>Your Reading: <?php echo htmlspecialchars($spreads[$selected_spread]['label']); ?></h2>
         <p><strong>Your Question:</strong> "<?php echo htmlspecialchars($question); ?>"</p>
-        
         <div class="card-container">
 <?php foreach ($reading_results as $index => $card): ?>
     <div class="tarot-card">
