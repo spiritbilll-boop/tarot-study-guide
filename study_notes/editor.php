@@ -6,6 +6,7 @@ Controller
 ============================================================
 */
 require_once __DIR__ . '/../common/db.php';
+require_once __DIR__ . '/common.php';
 /*
 ============================================================
 
@@ -163,8 +164,47 @@ if (
 Load page data
 ============================================================
 */
+
 $cards =
     get_cards($conn);
+
+/*
+============================================================
+
+Current Card / Previous / Next Navigation
+
+============================================================
+*/
+
+$current_card_name = "";
+
+foreach ($cards as $card)
+{
+    if ($card["id"] == $card_id)
+    {
+        $current_card_name = $card["card_name"];
+        break;
+    }
+}
+
+if ($card_id > 1)
+{
+    $previous_card_id = $card_id - 1;
+}
+else
+{
+    $previous_card_id = $card_id;
+}
+
+if ($card_id < count($cards))
+{
+    $next_card_id = $card_id + 1;
+}
+else
+{
+    $next_card_id = $card_id;
+}
+
 $notes =
     get_notes(
         $conn,

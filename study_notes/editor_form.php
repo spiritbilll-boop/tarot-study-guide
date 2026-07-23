@@ -2,12 +2,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<?php if ($is_edit): ?>
-<input
-type="hidden"
-name="edit_id"
-value="<?php echo $edit_id; ?>">
-<?php endif; ?>
 <title>
 Study Notes Manager
 </title>
@@ -204,6 +198,12 @@ if ($message != "")
 </p>
 
 <form method="post" action="">
+<?php if ($is_edit): ?>
+<input
+type="hidden"
+name="edit_id"
+value="<?php echo $edit_id; ?>">
+<?php endif; ?>
 
 <table>
 
@@ -477,6 +477,7 @@ name="enabled"
 
 <input
 type="submit"
+name="save"
 value="<?php echo $button_text; ?>">
 
 <?php
