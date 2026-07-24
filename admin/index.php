@@ -9,18 +9,22 @@ require_once("common/header.php");
 <h2>Content Management</h2>
 
 <p>
-<a href="../study_notes/editor.php">
+<a href="<?= ADMIN_URL ?>/study_notes/editor.php">
 Study Notes Manager
 </a>
 </p>
 
 <p>
-<a href="../entity_topics/index.php">
+<a href="<?= ADMIN_URL ?>/entity_topics/index.php">
 Entity Topics Manager
 </a>
 </p>
 
-<p>Topic Editor (coming soon)</p>
+<p>
+<a href="<?= ADMIN_URL ?>/topic_editor/index.php">
+Topic Editor
+</a>
+</p>
 
 <p>Domain Editor (coming soon)</p>
 

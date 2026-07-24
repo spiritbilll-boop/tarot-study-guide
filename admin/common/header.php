@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "/../../common/config.php");
 /*
  * admin/common/header.php
  *
@@ -50,7 +51,9 @@ h2
     border: 2px solid #e43f5a;
     border-radius: 10px;
     padding: 30px;
-    min-width: 500px;
+    width: 95%;
+    max-width: 1400px;
+    box-sizing: border-box;
 }
 
 a
@@ -81,6 +84,96 @@ p
     margin-top: 40px;
     font-size: 14px;
 }
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th
+{
+    background: #2d5c88;
+    color: white;
+    padding: 10px;
+    border: 1px solid #555;
+}
+
+td
+{
+    padding: 8px 10px;
+    border: 1px solid #555;
+    text-align: left;
+}
+
+tr:nth-child(even)
+{
+    background: #22304a;
+}
+
+tr:hover
+{
+    background: #31496b;
+}
+
+.button
+{
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2d5c88;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover
+{
+    background: #3b76aa;
+    text-decoration: none;
+}
+
+.action-links a
+{
+    margin-right: 10px;
+}
+.action-links
+{
+    white-space: nowrap;
+    text-align: center;
+}
+.action-links a
+{
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #2d5c88;
+    border-radius: 4px;
+    background: #2d5c88;
+    color: white;
+    text-decoration: none;
+}
+
+.action-links a:hover
+{
+    background: #3b76aa;
+    text-decoration: none;
+}
+
+input[type=text],
+textarea,
+select
+{
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+input[type=submit],
+button
+{
+    padding: 8px 16px;
+}
 
 </style>
 
@@ -94,9 +187,7 @@ p
 
 <a href="../index.php">Tarot Application</a> |
 <a href="../knowledge_graph/">Knowledge Graph</a> |
-<a href="../study_notes/editor.php">Study Notes</a> |
-<a href="../entity_topics/">Entity Topics</a>
+<a href="<?= ADMIN_URL ?>/study_notes/editor.php"></a>
+<a href="../entity_topics/">Entity Topics Manager</a>
 
 </div>
-
-<div class="admin-box">
