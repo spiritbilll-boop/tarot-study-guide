@@ -101,6 +101,7 @@ $res=$stmt->get_result();
 while($row=$res->fetch_assoc()){
     $availableTopics[]=$row;
 }
+$availableTopicCount = count($availableTopics);
 $stmt->close();
 ?>
 <!doctype html>
