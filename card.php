@@ -21,8 +21,7 @@ Version 1
 */
 
 require_once __DIR__ . '/common/db.php';
-
-require_once __DIR__ . '/study_notes/common.php';
+require_once __DIR__ . '/admin/study_notes/common.php';
 
 /*
 ------------------------------------------------------------
