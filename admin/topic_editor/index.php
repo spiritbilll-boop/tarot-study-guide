@@ -33,30 +33,24 @@ $result = mysqli_query(
 </p>
 
 <table>
-
 <tr>
     <th>Domain</th>
     <th>Topic</th>
     <th>Enabled</th>
     <th>Actions</th>
 </tr>
-
 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-
 <tr>
-
 <td><?= htmlspecialchars($row["domain_name"]) ?></td>
-
 <td><?= htmlspecialchars($row["name"]) ?></td>
-
 <td><?= $row["enabled"] ? "Yes" : "No" ?></td>
-
 <td class="action-links">
-
 <a href="edit.php?id=<?= $row["id"] ?>">Edit</a>
-
+<a href="delete.php?id=<?= $row["id"] ?>"
+   onclick="return confirm('Delete this topic?');">
+    Delete
+</a>
 </td>
-
 </tr>
 
 <?php endwhile; ?>
