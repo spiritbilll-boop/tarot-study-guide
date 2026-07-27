@@ -10,7 +10,7 @@ require_once("common/header.php");
 
 <p>
 <a href="<?= ADMIN_URL ?>/study_notes/editor.php">
-Study Notes Manager
+Study Notes Editor
 </a>
 </p>
 
