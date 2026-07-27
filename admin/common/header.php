@@ -186,8 +186,8 @@ button
 <div class="navbar">
 
 <a href="../index.php">Tarot Application</a> |
-<a href="../knowledge_graph/">Knowledge Graph</a> |
-<a href="<?= ADMIN_URL ?>/study_notes/editor.php"></a>
-<a href="entity_topics/">Entity Topics Manager</a>
+<a href="/tarot-study-guide/admin/">Administration Home</a> |
+<a href="/tarot-study-guide/admin/study_notes/editor.php">Study Notes Editor</a> |
+<a href="/tarot-study-guide/admin/entity_topics/">Entity Topics Manager</a>
 
 </div>

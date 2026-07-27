@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>
-Study Notes Manager
+Study Notes Editor
 </title>
 <style>
 body
@@ -57,7 +57,7 @@ input[type=text]
 </head>
 <body>
 <h1>
-Study Notes Manager
+Study Notes Editor
 </h1>
 
 <h2>
