@@ -124,6 +124,11 @@ select{min-width:420px}
 <body>
 
 <h1>Entity Topics Manager</h1>
+<p>
+<a href="../">
+Administration Home
+</a>
+</p>
 
 <?php if($message!=''): ?>
 <div class="message"><?= htmlspecialchars($message) ?></div>
