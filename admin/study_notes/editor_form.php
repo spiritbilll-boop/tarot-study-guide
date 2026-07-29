@@ -60,6 +60,12 @@ input[type=text]
 Study Notes Editor
 </h1>
 
+<p>
+<a href="../">
+Administration Home
+</a>
+</p>
+
 <h2>
 <p>
 
