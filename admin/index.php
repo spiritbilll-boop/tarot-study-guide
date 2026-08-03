@@ -26,7 +26,11 @@ Topic Editor
 </a>
 </p>
 
-<p>Domain Editor (coming soon)</p>
+<p>
+<a href="<?= ADMIN_URL ?>/domain_editor/">
+Domain Editor
+</a>
+</p>
 
 <h2>System</h2>
 
