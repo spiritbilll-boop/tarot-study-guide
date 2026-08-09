@@ -32,13 +32,19 @@ Domain Editor
 </a>
 </p>
 
+<h2>Reports &amp; Statistics</h2>
+
+<p>
+<a href="<?= ADMIN_URL ?>/reports/">
+Reports &amp; Statistics
+</a>
+</p>
+
 <h2>System</h2>
 
 <p>User Management (coming soon)</p>
 
 <p>Configuration (coming soon)</p>
-
-<p>Statistics (coming soon)</p>
 
 <?php
 

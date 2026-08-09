@@ -33,14 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $topic["domain_id"] = intval($_POST["domain_id"]);
     $topic["name"] = trim($_POST["name"]);
     $topic["description"] = trim($_POST["description"]);
+    $topic["enabled"] = isset($_POST["enabled"]) ? 1 : 0;
 
     if ($id == 0)
     {
         $stmt = mysqli_prepare(
             $conn,
             "INSERT INTO topics
-             (domain_id, name, description)
-             VALUES (?, ?, ?)"
+             (domain_id, name, description, enabled)
+             VALUES (?, ?, ?, ?)"
         );
 
         if (!$stmt)
@@ -50,10 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         mysqli_stmt_bind_param(
             $stmt,
-            "iss",
+            "issi",
             $topic["domain_id"],
             $topic["name"],
-            $topic["description"]
+            $topic["description"],
+            $topic["enabled"]
         );
 
 try
@@ -82,6 +84,58 @@ catch (mysqli_sql_exception $e)
 }
 
 mysqli_stmt_close($stmt);
+    }
+    else
+    {
+        $stmt = mysqli_prepare(
+            $conn,
+            "UPDATE topics
+             SET
+                 domain_id = ?,
+                 name = ?,
+                 description = ?,
+                 enabled = ?
+             WHERE id = ?"
+        );
+
+        if (!$stmt)
+        {
+            die(mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param(
+            $stmt,
+            "issii",
+            $topic["domain_id"],
+            $topic["name"],
+            $topic["description"],
+            $topic["enabled"],
+            $id
+        );
+
+        try
+        {
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+            header("Location: edit.php?id=" . $id . "&saved=1");
+            exit;
+        }
+        catch (mysqli_sql_exception $e)
+        {
+            switch ($e->getCode())
+            {
+                case 1062:
+                    $error = 'A topic with that name already exists in the selected domain.';
+                    break;
+
+                default:
+                    $error = $e->getMessage();
+                    break;
+            }
+        }
+
+        mysqli_stmt_close($stmt);
     }
 }
 
@@ -146,7 +200,36 @@ if ($id > 0)
 <textarea id="description" name="description" rows="6"><?php echo htmlspecialchars($topic["description"]); ?></textarea>
 </p>
 
-<p><input type="submit" value="Save Topic"></p>
+<p>
+<label>
+<input
+type="checkbox"
+name="enabled"
+<?php if ($topic["enabled"]) echo "checked"; ?>
+>
+Enabled
+</label>
+</p>
+
+<p>
+
+<input type="submit" value="Save Topic">
+
+<?php if ($id > 0): ?>
+
+&nbsp;
+
+<a
+class="button"
+href="delete.php?id=<?= $id ?>"
+onclick="return confirm('Delete this topic?');"
+>
+Delete Topic
+</a>
+
+<?php endif; ?>
+
+</p>
 
 </form>
 

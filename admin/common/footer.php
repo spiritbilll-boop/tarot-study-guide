@@ -4,7 +4,7 @@
 
 <p>
 
-<a href="../index.php">
+<a href="/tarot-study-guide/">
 
 Return to Tarot Application
 
@@ -12,11 +12,6 @@ Return to Tarot Application
 
 </p>
 
-<p>
-
-Administrator Console
-
-</p>
 
 </div>
 
