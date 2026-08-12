@@ -65,6 +65,7 @@ $position_labels = [
 $reading_results = [];
 $question = '';
 $selected_spread = 'single';
+$randomizer = new \Random\Randomizer();
 
 // 3. HANDLE USER DRAW REQUEST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['draw'])) {
@@ -79,9 +80,8 @@ $card_count = $spreads[$selected_spread]['count'];
 
 // Generate an array from 1 to 78, shuffle them, and pick the required amount
 $deck = range(1, 78);
-shuffle($deck);
+$deck = $randomizer->shuffleArray($deck);
 $drawn_ids = array_slice($deck, 0, $card_count);
-
 
 // Fetch the drawn card details from our database
 // Using an array map to ensure all IDs are integers for security
@@ -116,7 +116,7 @@ foreach ($drawn_ids as $id) {
 if (isset($cards_by_id[$id])) {
     $card = $cards_by_id[$id];
     // 50% chance for the card to be reversed
-    $card['is_reversed'] = (rand(0, 1) === 1); 
+    $card['is_reversed'] = ($randomizer->getInt(0, 1) === 1);
 $orientation_codes[] =
 $card['is_reversed']
 ? 'R'
@@ -198,7 +198,7 @@ text-decoration:underline;
        Tarot Study Guide
     </a>
 
-<a href="card.php?id=<?php echo rand(1,78); ?>"
+<a href="card.php?id=<?php echo $randomizer->getInt(1,78); ?>"
    style="
         display:inline-block;
         background:#162447;
