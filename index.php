@@ -334,17 +334,14 @@ result of a unique, collaborative effort between a two-person team of me and Cha
   <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=pentacles" target=_blank>Pentacles (Alchemical element Earth)</a></td><td>43-56</td>
 </table>
 </center>
+<h2>Documentation</h2>
 <p><a class="nav-link" href="/docs/tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a></p>
 <p><a class="nav-link" href="/docs/tarot_db.png" target=_blank>For RDBMS geeks: Entity-Relationship (ER) diagram</a></p>
-<h2>Documentation</h2>
-  <a  class="nav-link" href="/docs/tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a>
-  <br>
-  <a class="nav-link"href="/docs/tarot_db.png" target=_blank>Entity-Relationship Diagram</a>
 <br>
     <form method="POST" action="">
 <center>
         <label for="question">Focus your mind and enter your question:</label>
-        <input type="text" id="question" name="question" value="<?php echo htmlspecialchars($question); ?>" required placeholder="e.g., What does my career path look like this month?">
+        <input type="text" id="question" name="question" value="<?php echo htmlspecialchars($question); ?>" required placeholder="Enter your question or meditation">
         
         <label for="spread_type">Choose Spread:</label>
         <select id="spread_type" name="spread_type">
