@@ -356,6 +356,15 @@ echo htmlspecialchars(
     $card['card_name']
 );
 ?>">
+<p style="text-align:center; margin:20px;">
+<a
+class="button"
+href="card_topics.php?id=<?php echo $card_id; ?>"
+style="color:#ffd966;"
+>
+Explore Associated Knowledge
+</a>
+</p>
 <div class="panel">
 
 <table

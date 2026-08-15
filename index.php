@@ -15,51 +15,129 @@ $spreads = [
 'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
 ];
 $position_labels = [
-
 'single' => [
-"General Insight"
+    [
+        "label" => "General Insight",
+        "meaning" => "What is the most important insight, energy, or perspective available to me regarding the question I have brought to the Tarot? What should I pay particular attention to at this time?"
+    ]
 ],
-
 'three' => [
-"Past",
-"Present",
-"Future"
+    [
+        "label" => "Past",
+        "meaning" => "What past events, choices, experiences, or patterns are still influencing the situation I am asking about?"
+    ],
+    [
+        "label" => "Present",
+        "meaning" => "What is happening in my life right now in relation to my question, and what energy, challenge, or opportunity deserves my attention?"
+    ],
+    [
+        "label" => "Future",
+        "meaning" => "Where is this situation currently tending, and what potential direction or development should I be aware of if the present trajectory continues?"
+    ]
 ],
 'bms_three' => [
-"Body: What I need to work on for physical health and/or how to go about doing it",
-"Mind: Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc",
-"Spirit: Tells me what I need to work on in my spiritual practice"
+    [
+        "label" => "Body",
+        "meaning" => "What I need to work on for physical health and/or how to go about doing it"
+    ],
+    [
+        "label" => "Mind",
+        "meaning" => "Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc"
+    ],
+    [
+        "label" => "Spirit",
+        "meaning" => "Tells me what I need to work on in my spiritual practice"
+    ]
 ],
 
 'five' => [
-"Situation",
-"Obstacle",
-"Past",
-"Present",
-"Future"
+    [
+        "label" => "Situation",
+        "meaning" => "What is the fundamental situation surrounding my question? What are the main circumstances, energies, or themes that I need to understand?"
+    ],
+    [
+        "label" => "Obstacle",
+        "meaning" => "What is standing in the way of progress, clarity, or resolution? What challenge, resistance, blind spot, or conflicting influence needs to be recognized?"
+    ],
+    [
+        "label" => "Past",
+        "meaning" => "What important past experience, decision, pattern, or influence contributed to the situation as it exists today?"
+    ],
+    [
+        "label" => "Present",
+        "meaning" => "What is the central energy of the situation right now? What am I experiencing, confronting, or being invited to recognize in the present moment?"
+    ],
+    [
+        "label" => "Future",
+        "meaning" => "Where is the situation tending if its present energies continue? What potential development or outcome should I be aware of, remembering that my choices can influence the path ahead?"
+    ]
 ],
 
-'five card Self Assessment & Potential' => [
-"My Best Qualities",
-"My Gift To Others",
-"What Brings me joy",
-"Unrecognized Potential",
-"How I Perceive Myself"
+'Five Card Self Assessment & Potential' => [
+    [
+        "label" => "My Best Qualities",
+        "meaning" => "What qualities, strengths, talents, or positive characteristics do I possess that are especially important for me to recognize and develop?"
+    ],
+    [
+        "label" => "My Gift To Others",
+        "meaning" => "What do I naturally have to offer other people? What quality, talent, perspective, or energy can I contribute to the lives of those around me?"
+    ],
+    [
+        "label" => "What Brings me joy",
+        "meaning" => "What activities, experiences, relationships, or inner qualities have the potential to bring me genuine happiness, fulfillment, and a sense of aliveness?"
+    ],
+    [
+        "label" => "Unrecognized Potential",
+        "meaning" => "What ability, quality, possibility, or dimension of myself may I possess without fully recognizing or expressing it?"
+    ],
+    [
+        "label" => "How I Perceive Myself",
+        "meaning" => "How am I currently seeing and understanding myself? What does my self-image reveal about the way I relate to my own identity, strengths, limitations, and possibilities?"
+    ]
 ],
 
 'Celtic Cross' => [
-"Current Situation",
-"Obstacle",
-"Goal",
-"Past",
-"Near Future",
-"The Querent (current state)",
-"The Querent (the Influences)",
-"The Environment",
-"Hopes and Fears",
-"Final Outcome"
+    [
+        "label" => "Current Situation",
+        "meaning" => "What is at the heart of my question right now? What is the central situation, energy, or circumstance that I most need to understand?"
+    ],
+    [
+        "label" => "Obstacle",
+        "meaning" => "What force, challenge, resistance, or complication is crossing the situation? What may be preventing progress or making the situation more difficult?"
+    ],
+    [
+        "label" => "Goal",
+        "meaning" => "What am I consciously seeking, hoping to achieve, or moving toward? What does my mind believe would represent a desirable resolution to this situation?"
+    ],
+    [
+        "label" => "Past",
+        "meaning" => "What important past event, experience, decision, or pattern has contributed to the situation I now find myself in?"
+    ],
+    [
+        "label" => "Near Future",
+        "meaning" => "What energy or development is likely to emerge next? What direction is the situation moving toward in the relatively near future?"
+    ],
+    [
+        "label" => "The Querent (current state)",
+        "meaning" => "What is my present inner state in relation to this situation? What am I feeling, thinking, experiencing, or bringing consciously into the circumstances?"
+    ],
+    [
+        "label" => "The Querent (the Influences)",
+        "meaning" => "What internal influences are affecting the way I am experiencing or responding to this situation? What attitudes, beliefs, fears, desires, or patterns may be shaping my response?"
+    ],
+    [
+        "label" => "The Environment",
+        "meaning" => "What external people, circumstances, relationships, or environmental forces are influencing the situation? What is happening around me that I need to take into account?"
+    ],
+    [
+        "label" => "Hopes and Fears",
+        "meaning" => "What am I secretly hoping for, longing for, or expecting ? and what am I afraid might happen? Where might hope and fear be influencing one another?"
+    ],
+    [
+        "label" => "Final Outcome",
+        "meaning" => "What direction is the entire situation tending toward when all of the preceding influences are considered? What potential outcome is suggested if the present course continues?"
+    ]
 ]
-
 ];
 
 $reading_results = [];
@@ -294,10 +372,16 @@ Position <?php echo $index + 1; ?>
 <?php
 if (isset($position_labels[$selected_spread][$index]))
 {
+    $position = $position_labels[$selected_spread][$index];
+
     echo "<br>";
-    echo "<span style=\"font-size:20px;color:#ffd966;\">";
-    echo htmlspecialchars($position_labels[$selected_spread][$index]);
+    echo "<span style=\"font-size:20px;color:#ffd966;font-weight:bold;\">";
+    echo htmlspecialchars($position['label']);
     echo "</span>";
+
+    echo "<div style=\"font-size:16px;color:#ffffff;font-weight:normal;font-style:italic;line-height:1.5;margin:10px 15px 0 15px;\">";
+    echo htmlspecialchars($position['meaning']);
+    echo "</div>";
 }
 ?>
 
@@ -324,6 +408,15 @@ href="card.php?id=<?php echo $card['id']; ?>">
 <?php echo $card['is_reversed'] ? ' (Reversed)' : ' (Upright)'; ?>
 
 </h4>
+
+<p style="margin:15px;">
+<a
+href="card_topics.php?id=<?php echo $card['id']; ?>"
+style="color:#ffd966; text-decoration:none; font-weight:bold;"
+>
+Explore Associated Knowledge
+</a>
+</p>
 
 <?php
 
