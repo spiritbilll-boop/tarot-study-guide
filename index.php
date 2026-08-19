@@ -245,6 +245,17 @@ text-decoration:none;
 
 font-weight:bold;
 }
+.knowledge-graph-link
+{
+    color: #ffd966;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.knowledge-graph-link:hover
+{
+    color: #ffe699;
+}
 
 .card-link:hover
 {
@@ -404,6 +415,19 @@ href="card.php?id=<?php echo $card['id']; ?>">
 
 <?php echo $card['is_reversed'] ? ' (Reversed)' : ' (Upright)'; ?>
 
+</h4>
+
+<p style="margin: 0 0 15px 0;">
+
+<a
+class="knowledge-graph-link"
+href="knowledge_graph/card.php?id=<?php echo $card['id']; ?>">
+
+Knowledge Graph
+
+</a>
+
+</p>
 </h4>
 
 <p style="margin:15px;">
