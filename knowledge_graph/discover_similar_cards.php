@@ -30,18 +30,30 @@ $row = mysqli_fetch_assoc($result);
 $card_name = $row ? $row["card_name"] : "Unknown Card";
 
 /*
-** Find similar cards
+** Find similar cards and the Topics they share
 */
 
 $sql = "
 SELECT
     c2.id,
     c2.card_name,
-    COUNT(*) AS shared_topics
-FROM entity_topics et1
+    COUNT(*) AS shared_topics,
+    GROUP_CONCAT(
+        CONCAT(d.name, ': ', t.name)
+        ORDER BY d.name, t.name
+        SEPARATOR ' | '
+    ) AS shared_knowledge
+FROM
+    entity_topics et1
 
 JOIN entity_topics et2
     ON et1.topic_id = et2.topic_id
+
+JOIN topics t
+    ON t.id = et1.topic_id
+
+JOIN domains d
+    ON d.id = t.domain_id
 
 JOIN tarot_cards c2
     ON c2.id = et2.entity_id
@@ -96,6 +108,7 @@ td
     border: 1px solid #808080;
     padding: 8px;
     text-align: left;
+    vertical-align: top;
 }
 
 th
@@ -117,6 +130,12 @@ tr:nth-child(even)
 .numeric
 {
     text-align: right;
+    white-space: nowrap;
+}
+
+.shared
+{
+    line-height: 1.5;
 }
 
 </style>
@@ -191,6 +210,12 @@ Card
 
 </th>
 
+<th>
+
+Shared Knowledge
+
+</th>
+
 </tr>
 
 <?php
@@ -225,6 +250,12 @@ while ($row = mysqli_fetch_assoc($result))
 <?php echo htmlspecialchars($row["card_name"]); ?>
 
 </a>
+
+</td>
+
+<td class="shared">
+
+<?php echo htmlspecialchars($row["shared_knowledge"]); ?>
 
 </td>
 
