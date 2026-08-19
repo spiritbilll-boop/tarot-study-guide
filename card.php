@@ -365,6 +365,15 @@ style="color:#ffd966;"
 Explore Associated Knowledge
 </a>
 </p>
+<p style="text-align:center; margin:20px;">
+<a
+class="button"
+href="knowledge_graph/discover_similar_cards.php?id=<?php echo $card_id; ?>"
+style="color:#ffd966;"
+>
+Discover Similar Cards
+</a>
+</p>
 <div class="panel">
 
 <table
