@@ -40,7 +40,9 @@ $totalTopics =
 
 <title>Knowledge Graph Explorer - Unused Topics</title>
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 <style>
 
@@ -56,16 +58,6 @@ td
     border: 1px solid #808080;
     padding: 8px;
     text-align: left;
-}
-
-th
-{
-    background: #e8e8e8;
-}
-
-tr:nth-child(even)
-{
-    background: #f7f7f7;
 }
 
 .footer
@@ -126,11 +118,19 @@ Every topic is currently associated with at least one tarot card.
 
 <tr>
 
-<td><?= htmlspecialchars($row['domain']) ?></td>
+<td>
+<?= htmlspecialchars($row['domain']) ?>
+</td>
 
-<td><?= $row['topic_id'] ?></td>
+<td>
+<?= $row['topic_id'] ?>
+</td>
 
-<td><?= htmlspecialchars($row['topic']) ?></td>
+<td>
+<a href="topic.php?id=<?= $row['topic_id'] ?>">
+<?= htmlspecialchars($row['topic']) ?>
+</a>
+</td>
 
 </tr>
 
