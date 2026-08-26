@@ -1,0 +1,113 @@
+/*
+============================================================
+Tarot Study Guide
+Knowledge Graph Stylesheet
+
+Shared visual styling for the Knowledge Graph Explorer.
+============================================================
+*/
+
+body
+{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background: #1a1a2e;
+    color: #ffffff;
+    margin: 30px;
+}
+
+h1
+{
+    color: #ffd966;
+    border-bottom: 3px solid #457b9d;
+    padding-bottom: 10px;
+}
+
+h2
+{
+    color: #ffd966;
+    margin-top: 30px;
+}
+
+h3
+{
+    color: #ffffff;
+}
+
+a
+{
+    color: #ffd966;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+a:hover
+{
+    color: #ffe699;
+}
+
+hr
+{
+    border: none;
+    border-top: 1px solid #457b9d;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+    background: #162447;
+}
+
+th,
+td
+{
+    border: 1px solid #457b9d;
+    padding: 8px;
+    text-align: left;
+}
+
+th
+{
+    background: #243b67;
+    color: #ffd966;
+}
+
+tr:nth-child(even)
+{
+    background: #1e3154;
+}
+
+.footer
+{
+    margin-top: 20px;
+    font-style: italic;
+    color: #dddddd;
+}
+
+.panel
+{
+    background: #162447;
+    border: 1px solid #457b9d;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.menu
+{
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-item
+{
+    margin: 10px 0;
+}
+ul
+{
+    line-height: 1.8;
+}

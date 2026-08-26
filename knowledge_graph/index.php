@@ -4,27 +4,9 @@
 <meta charset="utf-8">
 <title>Knowledge Graph Explorer</title>
 
-<link rel="stylesheet" href="../style.css">
-
-<style>
-
-body
-{
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-h2
-{
-    margin-top: 30px;
-}
-
-ul
-{
-    line-height: 1.8;
-}
-
-</style>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 </head>
 
