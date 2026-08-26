@@ -54,9 +54,9 @@ $row =
 
 <title><?php echo htmlspecialchars($row["topic_name"]); ?></title>
 
-<link
-    rel="stylesheet"
-    href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 </head>
 
@@ -110,7 +110,7 @@ do
 ?>
 <tr>
 <td>
-<a href="../card.php?id=<?php echo $row["card_id"]; ?>">
+<a href="card.php?id=<?php echo $row["card_id"]; ?>">
 <?php
 echo htmlspecialchars(
     $row["card_id"]
@@ -119,7 +119,7 @@ echo htmlspecialchars(
 </a>
 </td>
 <td>
-<a href="../card.php?id=<?php echo $row["card_id"]; ?>">
+<a href="card.php?id=<?php echo $row["card_id"]; ?>">
 <?php
 echo htmlspecialchars(
     $row["card_name"]
