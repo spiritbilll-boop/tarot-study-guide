@@ -40,7 +40,9 @@ $topic_name = "";
 
 <title>Knowledge Graph Explorer - Cards</title>
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 <style>
 
@@ -58,15 +60,6 @@ td
     text-align:left;
 }
 
-th
-{
-    background:#e8e8e8;
-}
-
-tr:nth-child(even)
-{
-    background:#f7f7f7;
-}
 
 td.numeric
 {
