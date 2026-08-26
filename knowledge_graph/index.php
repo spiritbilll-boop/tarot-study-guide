@@ -69,22 +69,6 @@ Domain Summary
 </a>
 </li>
 
-<!--
-
-<li>
-<a href="knowledge_graph_completeness.php">
-Knowledge Graph Completeness
-</a>
-</li>
-
-<li>
-<a href="discover_similar_cards.php">
-Discover Similar Cards
-</a>
-</li>
-
--->
-
 </ul>
 
 <h2>Administration</h2>
@@ -92,7 +76,7 @@ Discover Similar Cards
 <ul>
 
 <li>
-<a href="../entity_topics/index.php">
+<a href="../admin/entity_topics/index.php">
 Entity Topics Manager
 </a>
 </li>
