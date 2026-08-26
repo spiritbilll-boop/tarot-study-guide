@@ -34,12 +34,12 @@ while ($row = $result->fetch_assoc())
 <head>
 <meta charset="utf-8">
 <title>Knowledge Graph Explorer - Cards by Topic</title>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 <style>
 table{border-collapse:collapse;width:100%}
 th,td{border:1px solid #808080;padding:8px;text-align:left}
-th{background:#e8e8e8}
-tr:nth-child(even){background:#f7f7f7}
 .footer{margin-top:20px;font-style:italic}
 </style>
 </head>
