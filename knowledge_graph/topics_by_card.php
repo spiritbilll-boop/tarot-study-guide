@@ -40,7 +40,9 @@ while ($row = $result->fetch_assoc())
 
 <title>Knowledge Graph Explorer - Topics by Card</title>
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 <style>
 
@@ -56,16 +58,6 @@ td
     border: 1px solid #808080;
     padding: 8px;
     text-align: left;
-}
-
-th
-{
-    background: #e8e8e8;
-}
-
-tr:nth-child(even)
-{
-    background: #f7f7f7;
 }
 
 .footer
