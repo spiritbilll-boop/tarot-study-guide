@@ -92,7 +92,9 @@ $result = mysqli_stmt_get_result($stmt);
 
 <title>Knowledge Graph Explorer - Discover Similar Cards</title>
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="knowledge_graph.css">
 
 <style>
 
@@ -111,15 +113,6 @@ td
     vertical-align: top;
 }
 
-th
-{
-    background: #e8e8e8;
-}
-
-tr:nth-child(even)
-{
-    background: #f7f7f7;
-}
 
 .footer
 {
