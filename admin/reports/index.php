@@ -34,6 +34,11 @@ Unused Topics
 Topics by Domain
 </a>
 </p>
+<p>
+<a href="../../knowledge_graph/entity_topics_report.php">
+Entity Topics Report
+</a>
+</p>
 
 <p>
 <a href="disabled_topics.php">
