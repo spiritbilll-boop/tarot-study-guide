@@ -333,7 +333,9 @@ result of a unique, collaborative effort between a two-person team of me and Cha
   <th>Section of the Tarot Deck</th><th>Card Number range</th>
 </tr>
 <tr>
-  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=major" target=_blank>Major Arcana in Fool-to-World order</td></a><td>57-78</td>
+<tr>
+  <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=major" target=_blank>Major Arcana in Fool-to-World order</a></td><td>57-78</td>
+</tr>
 </tr>
 <tr>
   <td><a class="nav-link" href="/tarot-study-guide/cards.php?category=cups" target=_blank>Cups (Alchemical element Water)</a></td><td>1-14</td>
@@ -432,9 +434,9 @@ Knowledge Graph
 
 <p style="margin:15px;">
 <a
-href="card_topics.php?id=<?php echo $card['id']; ?>
-style="color:#ffd966; text-decoration:none; font-weight:bold;
-Explore Associated Knowledge
+    href="card_topics.php?id=<?php echo $card['id']; ?>"
+    style="color:#ffd966; text-decoration:none; font-weight:bold;">
+    Explore Associated Knowledge
 </a>
 </p>
 
