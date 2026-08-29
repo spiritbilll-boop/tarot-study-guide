@@ -324,9 +324,6 @@ text-decoration:underline;
   echo "The time is " . $currentDate . " GMT";
 ?>
 
-<p>Welcome to the beta release of our Tarot application. This project is the
-result of a unique, collaborative effort between a two-person team of me and ChatGPT.</p>
-<p>Thank you for exploring the beta. We hope you enjoy using it as much as we enjoyed building it.</p>
 <center>
 <table border=1>
 <tr>
