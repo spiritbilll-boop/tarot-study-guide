@@ -430,6 +430,18 @@ Knowledge Graph
 </a>
 
 </p>
+
+<p style="margin: 0 0 15px 0;">
+
+<a
+class="knowledge-graph-link"
+href="knowledge_graph/discover_similar_cards.php?id=<?php echo $card['id']; ?>">
+
+Discover Similar Cards
+
+</a>
+
+</p>
 </h4>
 
 <?php
