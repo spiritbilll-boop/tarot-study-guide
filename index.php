@@ -432,14 +432,6 @@ Knowledge Graph
 </p>
 </h4>
 
-<p style="margin:15px;">
-<a
-    href="card_topics.php?id=<?php echo $card['id']; ?>"
-    style="color:#ffd966; text-decoration:none; font-weight:bold;">
-    Explore Associated Knowledge
-</a>
-</p>
-
 <?php
 
 $meaning =
