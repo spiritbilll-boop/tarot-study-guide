@@ -5,140 +5,67 @@ require_once(__DIR__ . "/admin/study_notes/common.php");
 // mysqli, NOT PDO
 require_once __DIR__ . '/common/db.php';
 
-// 2. CONFIGURING SPREADS
-$spreads = [
-'single' => ['label' => 'Single Card (General Insight)', 'count' => 1],
-'three'  => ['label' => 'Three Cards (Past, Present, Future)', 'count' => 3],
-'bms_three'  => ['label' => 'Three Cards (Body, Mind, Spirit)', 'count' => 3],
-'five'   => ['label' => 'Five Cards (Situation, Obstacle, Past, Present, Future)', 'count' => 5],
-'five card Self Assessment & Potential'   => ['label' => 'Five Cards (My Best Qualities, My gift to Others, What Brings me joy, Unrecognized Potential, How I perceive myself)', 'count' => 5],
-'Celtic Cross' => ['label' => 'Celtic Cross (Current Situation, Obstacle, Goal, Past, Near Future, The Querent (current state), The Querent (the Influences), The Environment, Hopes and Fears, Final Outcome)', 'count' => 10]
-];
-$position_labels = [
-'single' => [
-    [
-        "label" => "General Insight",
-        "meaning" => "What is the most important insight, energy, or perspective available to me regarding the question I have brought to the Tarot? What should I pay particular attention to at this time?"
-    ]
-],
-'three' => [
-    [
-        "label" => "Past",
-        "meaning" => "What past events, choices, experiences, or patterns are still influencing the situation I am asking about?"
-    ],
-    [
-        "label" => "Present",
-        "meaning" => "What is happening in my life right now in relation to my question, and what energy, challenge, or opportunity deserves my attention?"
-    ],
-    [
-        "label" => "Future",
-        "meaning" => "Where is this situation currently tending, and what potential direction or development should I be aware of if the present trajectory continues?"
-    ]
-],
-'bms_three' => [
-    [
-        "label" => "Body",
-        "meaning" => "What I need to work on for physical health and/or how to go about doing it"
-    ],
-    [
-        "label" => "Mind",
-        "meaning" => "Insights into my thought patterns, and what might need to change so that I can feel more joy, calm, etc"
-    ],
-    [
-        "label" => "Spirit",
-        "meaning" => "Tells me what I need to work on in my spiritual practice"
-    ]
-],
+// 2. CONFIGURING SPREADS FROM THE DATABASE
 
-'five' => [
-    [
-        "label" => "Situation",
-        "meaning" => "What is the fundamental situation surrounding my question? What are the main circumstances, energies, or themes that I need to understand?"
-    ],
-    [
-        "label" => "Obstacle",
-        "meaning" => "What is standing in the way of progress, clarity, or resolution? What challenge, resistance, blind spot, or conflicting influence needs to be recognized?"
-    ],
-    [
-        "label" => "Past",
-        "meaning" => "What important past experience, decision, pattern, or influence contributed to the situation as it exists today?"
-    ],
-    [
-        "label" => "Present",
-        "meaning" => "What is the central energy of the situation right now? What am I experiencing, confronting, or being invited to recognize in the present moment?"
-    ],
-    [
-        "label" => "Future",
-        "meaning" => "Where is the situation tending if its present energies continue? What potential development or outcome should I be aware of, remembering that my choices can influence the path ahead?"
-    ]
-],
+$spreads = [];
+$position_labels = [];
 
-'Five Card Self Assessment & Potential' => [
-    [
-        "label" => "My Best Qualities",
-        "meaning" => "What qualities, strengths, talents, or positive characteristics do I possess that are especially important for me to recognize and develop?"
-    ],
-    [
-        "label" => "My Gift To Others",
-        "meaning" => "What do I naturally have to offer other people? What quality, talent, perspective, or energy can I contribute to the lives of those around me?"
-    ],
-    [
-        "label" => "What Brings me joy",
-        "meaning" => "What activities, experiences, relationships, or inner qualities have the potential to bring me genuine happiness, fulfillment, and a sense of aliveness?"
-    ],
-    [
-        "label" => "Unrecognized Potential",
-        "meaning" => "What ability, quality, possibility, or dimension of myself may I possess without fully recognizing or expressing it?"
-    ],
-    [
-        "label" => "How I Perceive Myself",
-        "meaning" => "How am I currently seeing and understanding myself? What does my self-image reveal about the way I relate to my own identity, strengths, limitations, and possibilities?"
-    ]
-],
+$spread_sql = "
+SELECT
+    s.id,
+    s.spread_key,
+    s.spread_name,
+    COUNT(sd.id) AS card_count
+FROM spreads s
+INNER JOIN spread_details sd
+    ON sd.spread_id = s.id
+GROUP BY
+    s.id,
+    s.spread_key,
+    s.spread_name
+ORDER BY
+    s.id
+";
 
-'Celtic Cross' => [
-    [
-        "label" => "Current Situation",
-        "meaning" => "What is at the heart of my question right now? What is the central situation, energy, or circumstance that I most need to understand?"
-    ],
-    [
-        "label" => "Obstacle",
-        "meaning" => "What force, challenge, resistance, or complication is crossing the situation? What may be preventing progress or making the situation more difficult?"
-    ],
-    [
-        "label" => "Goal",
-        "meaning" => "What am I consciously seeking, hoping to achieve, or moving toward? What does my mind believe would represent a desirable resolution to this situation?"
-    ],
-    [
-        "label" => "Past",
-        "meaning" => "What important past event, experience, decision, or pattern has contributed to the situation I now find myself in?"
-    ],
-    [
-        "label" => "Near Future",
-        "meaning" => "What energy or development is likely to emerge next? What direction is the situation moving toward in the relatively near future?"
-    ],
-    [
-        "label" => "The Querent (current state)",
-        "meaning" => "What is my present inner state in relation to this situation? What am I feeling, thinking, experiencing, or bringing consciously into the circumstances?"
-    ],
-    [
-        "label" => "The Querent (the Influences)",
-        "meaning" => "What internal influences are affecting the way I am experiencing or responding to this situation? What attitudes, beliefs, fears, desires, or patterns may be shaping my response?"
-    ],
-    [
-        "label" => "The Environment",
-        "meaning" => "What external people, circumstances, relationships, or environmental forces are influencing the situation? What is happening around me that I need to take into account?"
-    ],
-    [
-        "label" => "Hopes and Fears",
-        "meaning" => "What am I secretly hoping for, longing for, or expecting ? and what am I afraid might happen? Where might hope and fear be influencing one another?"
-    ],
-    [
-        "label" => "Final Outcome",
-        "meaning" => "What direction is the entire situation tending toward when all of the preceding influences are considered? What potential outcome is suggested if the present course continues?"
-    ]
-]
-];
+$spread_result = $conn->query($spread_sql);
+
+if ($spread_result)
+{
+    while ($spread = $spread_result->fetch_assoc())
+    {
+        $spreads[$spread['spread_key']] = [
+            'label' => $spread['spread_name'],
+            'count' => (int)$spread['card_count']
+        ];
+    }
+}
+
+$position_sql = "
+SELECT
+    s.spread_key,
+    sd.position_number,
+    sd.position_name,
+    sd.position_meaning
+FROM spreads s
+INNER JOIN spread_details sd
+    ON sd.spread_id = s.id
+ORDER BY
+    s.id,
+    sd.position_number
+";
+
+$position_result = $conn->query($position_sql);
+
+if ($position_result)
+{
+    while ($position = $position_result->fetch_assoc())
+    {
+        $position_labels[$position['spread_key']][] = [
+            'label' => $position['position_name'],
+            'meaning' => $position['position_meaning']
+        ];
+    }
+}
 
 $reading_results = [];
 $question = '';
