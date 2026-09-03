@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Knowledge Graph Explorer</title>
+<title>Knowledge Graph Explorer: Main Page</title>
 
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/theme.css">
@@ -12,7 +12,7 @@
 
 <body>
 
-<h1>Knowledge Graph Explorer</h1>
+<h1>Knowledge Graph Explorer: Main Page</h1>
 
 <p>
 Explore the Tarot Study Guide knowledge graph from several different perspectives.
