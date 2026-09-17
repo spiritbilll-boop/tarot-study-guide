@@ -1,5 +1,4 @@
 <?php
-//require_once 'auth.php';
 require_once(__DIR__ . "/admin/study_notes/common.php");
 // The rest of your application code goes safely right below here...
 // mysqli, NOT PDO
