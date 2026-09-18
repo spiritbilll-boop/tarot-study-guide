@@ -393,9 +393,8 @@ Delete
 <b>
 Next Sequence:
 </b>
-<?php echo h($form_title); ?>
-</h2>
-<table>
+<?php echo h($next_sequence); ?>
+</h2><table>
 <tr>
 <td>
 Title

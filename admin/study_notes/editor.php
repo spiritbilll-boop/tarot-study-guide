@@ -16,20 +16,20 @@ Defaults
 */
 $message = "";
 $card_id =
-    isset($_GET['card_id'])
-        ? intval($_GET['card_id'])
+    isset($_POST['card_id'])
+        ? intval($_POST['card_id'])
         : (
-            isset($_POST['card_id'])
-                ? intval($_POST['card_id'])
+            isset($_GET['card_id'])
+                ? intval($_GET['card_id'])
                 : 1
           );
 
 $orientation =
-    isset($_GET['orientation'])
-        ? $_GET['orientation']
+    isset($_POST['orientation'])
+        ? $_POST['orientation']
         : (
-            isset($_POST['orientation'])
-                ? $_POST['orientation']
+            isset($_GET['orientation'])
+                ? $_GET['orientation']
                 : "U"
           );
 /*
@@ -44,11 +44,10 @@ $edit_id =
     isset($_GET['edit'])
         ? intval($_GET['edit'])
         : (
-            isset($_POST['edit_id'])
+            isset($_POST['save']) && isset($_POST['edit_id'])
                 ? intval($_POST['edit_id'])
                 : 0
           );
-
 $edit_note = null;
 
 if ($edit_id > 0)
