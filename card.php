@@ -359,16 +359,17 @@ echo htmlspecialchars(
 <p style="text-align:center; margin:20px;">
 <a
 class="button"
-href="card_topics.php?id=<?php echo $card_id; ?> "target=_blank"
+href="card_topics.php?id=<?php echo $card_id; ?>"
 style="color:#ffd966;"
 >
 Explore Associated Knowledge
 </a>
 </p>
+
 <p style="text-align:center; margin:20px;">
 <a
 class="button"
-href="knowledge_graph/discover_similar_cards.php?id=<?php echo $card_id; ?> "target=_blank"
+href="knowledge_graph/discover_similar_cards.php?id=<?php echo $card_id; ?>"
 style="color:#ffd966;"
 >
 Discover Similar Cards
