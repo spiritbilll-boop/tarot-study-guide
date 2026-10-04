@@ -7,7 +7,7 @@ SELECT
     d.id             AS domain_id,
     d.name           AS domain,
     t.id             AS topic_id,
-    t.name           AS topic
+    t.description    AS topic
 FROM domains d
 JOIN topics t
     ON t.domain_id = d.id

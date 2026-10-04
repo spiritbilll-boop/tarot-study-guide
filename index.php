@@ -272,7 +272,7 @@ text-decoration:underline;
 </center>
 <h2>Documentation</h2>
 <p><a class="nav-link" href="/docs/tarot_overview.html" target=_blank>Tarot Deck: High-Level Outline</a></p>
-<p><a class="nav-link" href="/docs/tarot_db.png" target=_blank>For RDBMS geeks: Entity-Relationship (ER) diagram</a></p>
+<p><a class="nav-link" href="/images/tarot_db.png" target=_blank>For RDBMS geeks: Entity-Relationship (ER) diagram</a></p>
 <br>
     <form method="POST" action="">
 <center>
