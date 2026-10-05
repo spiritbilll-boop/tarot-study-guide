@@ -11,10 +11,13 @@ $domain_id = isset($_GET["domain_id"])
  */
 
 $domain_name = "Unknown Domain";
+$domain_description = "";
 
 $sql = "
 SELECT
-    name
+    id,
+    name,
+    description
 FROM domains
 WHERE id = $domain_id
 ";
@@ -23,7 +26,9 @@ $result = mysqli_query($conn, $sql);
 
 if ($result && ($row = mysqli_fetch_assoc($result)))
 {
+    $domain_id = $row["id"];
     $domain_name = $row["name"];
+    $domain_description = $row["description"];
 }
 
 /*
@@ -87,7 +92,21 @@ td
 
 <h1>Knowledge Graph Explorer</h1>
 
-<h2><?php echo htmlspecialchars($domain_name); ?></h2>
+<table>
+
+<tr>
+<th>Domain ID</th>
+<th>Domain</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td><?php echo htmlspecialchars($domain_id); ?></td>
+<td><?php echo htmlspecialchars($domain_name); ?></td>
+<td><?php echo htmlspecialchars($domain_description); ?></td>
+</tr>
+
+</table>
 
 <p>
 

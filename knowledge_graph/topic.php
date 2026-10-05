@@ -10,7 +10,9 @@ $sql = "
 SELECT
     t.id,
     t.name AS topic_name,
+    d.id AS domain_id,
     d.name AS domain_name,
+    d.description AS domain_description,
     c.id AS card_id,
     c.card_name AS card_name
 FROM topics t
@@ -80,13 +82,41 @@ echo $row["id"];
 
 <br>
 
-<b>Domain:</b>
+<table border="1" cellpadding="6">
 
+<tr>
+<th>Domain ID</th>
+<th>Domain</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>
+<?php
+echo htmlspecialchars(
+    $row["domain_id"]
+);
+?>
+</td>
+
+<td>
 <?php
 echo htmlspecialchars(
     $row["domain_name"]
 );
 ?>
+</td>
+
+<td>
+<?php
+echo htmlspecialchars(
+    $row["domain_description"]
+);
+?>
+</td>
+</tr>
+
+</table>
 
 </p>
 

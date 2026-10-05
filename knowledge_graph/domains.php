@@ -6,15 +6,18 @@ $sql = "
 SELECT
     d.id,
     d.name,
+    d.description,
     COUNT(t.id) AS topics
 FROM domains d
 LEFT JOIN topics t
     ON t.domain_id = d.id
 GROUP BY
     d.id,
-    d.name
+    d.name,
+    d.description,
+    d.display_order
 ORDER BY
-    d.name
+    d.display_order
 ";
 
 $result = mysqli_query($conn, $sql);
@@ -88,7 +91,9 @@ Return to Main Menu
 <table>
 
 <tr>
+<th>ID</th>
 <th>Domain</th>
+<th>Description</th>
 <th>Topics</th>
 </tr>
 
@@ -101,6 +106,14 @@ while ($row = mysqli_fetch_assoc($result))
 
 <tr>
 
+<td class="numeric">
+
+<?php
+echo $row["id"];
+?>
+
+</td>
+
 <td>
 
 <a href="topics.php?domain_id=<?php echo $row["id"]; ?>">
@@ -110,6 +123,14 @@ echo htmlspecialchars($row["name"]);
 ?>
 
 </a>
+
+</td>
+
+<td>
+
+<?php
+echo htmlspecialchars($row["description"]);
+?>
 
 </td>
 
