@@ -4,7 +4,9 @@ require_once("../common/db.php");
 
 $sql = "
 SELECT
+  d.id AS domain_id,
   d.name AS domain,
+  d.description AS domain_description,
   COUNT(DISTINCT t.id) AS total_topics,
   COUNT(DISTINCT et.topic_id) AS used_topics,
   COUNT(DISTINCT et.entity_id) AS cards
@@ -15,9 +17,11 @@ LEFT JOIN entity_topics et
     ON et.topic_id = t.id
 GROUP BY
     d.id,
-    d.name
+    d.name,
+    d.description,
+    d.display_order
 ORDER BY
-    d.name";
+    d.display_order";
 
 $result = $conn->query($sql);
 
@@ -111,7 +115,9 @@ Return to Main Menu
 
 <table>
 <tr>
+<th>Domain ID</th>
 <th>Domain</th>
+<th>Description</th>
 <th>Total Topics</th>
 <th>Used</th>
 <th>Unused</th>
@@ -134,7 +140,9 @@ foreach ($rows as $row):
 
 <tr>
 
+<td><?= htmlspecialchars($row['domain_id']) ?></td>
 <td><?= htmlspecialchars($row['domain']) ?></td>
+<td><?= htmlspecialchars($row['domain_description']) ?></td>
 
 <?php if ($row['total_topics'] == 0): ?>
 
@@ -160,7 +168,7 @@ foreach ($rows as $row):
 
 <tr>
 
-<th>Total</th>
+<th colspan="3">Total</th>
 <th class="numeric"><?= $totalTopics ?></th>
 <th class="numeric"><?= $totalUsed ?></th>
 <th class="numeric"><?= $totalTopics - $totalUsed ?></th>

@@ -63,6 +63,12 @@ Disabled Domains
 </a>
 </p>
 
+<p>
+<a href="../../knowledge_graph/domain_summary.php">
+Domain Summary
+</a>
+</p>
+
 <h3>Study Notes</h3>
 <p>
 <a href="study_notes_per_card.php">
