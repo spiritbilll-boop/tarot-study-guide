@@ -4,11 +4,13 @@ require_once("../common/db.php");
 
 $sql = "
 SELECT
-    tc.id      AS card_id,
+    tc.id             AS card_id,
     tc.card_name,
-    d.name     AS domain,
-    t.id       AS topic_id,
-    t.name     AS topic
+    d.id              AS domain_id,
+    d.name            AS domain,
+    d.description     AS domain_description,
+    t.id              AS topic_id,
+    t.name            AS topic
 FROM tarot_cards tc
 JOIN entity_topics et
     ON et.entity_id = tc.id
@@ -18,8 +20,8 @@ LEFT JOIN domains d
     ON d.id = t.domain_id
 ORDER BY
     tc.id,
-    d.name,
-    t.name";
+    d.display_order,
+    t.display_order";
 
 $result = $conn->query($sql);
 
@@ -99,13 +101,11 @@ Return to Main Menu
 <tr>
 
 <th>Card ID</th>
-
 <th>Card</th>
-
+<th>Domain ID</th>
 <th>Domain</th>
-
+<th>Description</th>
 <th>Topic ID</th>
-
 <th>Topic</th>
 
 </tr>
@@ -125,7 +125,12 @@ Return to Main Menu
 <?= htmlspecialchars($row['card_name']) ?>
 </a>
 </td>
+
+<td><?= $row['domain_id'] ?></td>
+
 <td><?= htmlspecialchars($row['domain']) ?></td>
+
+<td><?= htmlspecialchars($row['domain_description']) ?></td>
 
 <td><?= $row['topic_id'] ?></td>
 

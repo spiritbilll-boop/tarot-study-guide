@@ -3,7 +3,9 @@ require_once("../common/db.php");
 
 $sql = "
 SELECT
+    d.id AS domain_id,
     d.name AS domain,
+    d.description AS domain_description,
     tc.id AS card_id,
     tc.card_name,
     t.id AS topic_id,
@@ -16,8 +18,8 @@ JOIN tarot_cards tc
 LEFT JOIN domains d
   ON d.id = t.domain_id
 ORDER BY
-  d.name,
-  t.name,
+  d.display_order,
+  t.display_order,
   tc.id";
 
 $result = $conn->query($sql);
@@ -56,18 +58,22 @@ th,td{border:1px solid #808080;padding:8px;text-align:left}
 
 <table>
 <tr>
+<th>Domain ID</th>
 <th>Domain</th>
-<th>Topic</th>
+<th>Description</th>
 <th>Topic ID</th>
+<th>Topic</th>
 <th>Card ID</th>
 <th>Card</th>
 </tr>
 
 <?php foreach ($rows as $row): ?>
 <tr>
+<td><?= $row['domain_id'] ?></td>
 <td><?= htmlspecialchars($row['domain']) ?></td>
-<td><?= htmlspecialchars($row['topic']) ?></td>
+<td><?= htmlspecialchars($row['domain_description']) ?></td>
 <td><?= $row['topic_id'] ?></td>
+<td><?= htmlspecialchars($row['topic']) ?></td>
 <td>
 <a href="card.php?id=<?= $row['card_id'] ?>">
 <?= $row['card_id'] ?>

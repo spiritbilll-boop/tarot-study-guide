@@ -40,6 +40,12 @@ Reports &amp; Statistics
 </a>
 </p>
 
+<p>
+<a href="<?= APP_ROOT ?>/knowledge_graph/topics_by_card.php">
+Topics by Card
+</a>
+</p>
+
 <h2>System</h2>
 
 <p>User Management (coming soon)</p>

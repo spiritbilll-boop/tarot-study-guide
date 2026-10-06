@@ -6,7 +6,9 @@ $sql = "
 SELECT
     tc.id          AS card_id,
     tc.card_name,
+    d.id           AS domain_id,
     d.name         AS domain,
+    d.description  AS domain_description,
     t.id           AS topic_id,
     t.name         AS topic
 FROM entity_topics et
@@ -18,7 +20,8 @@ LEFT JOIN domains d
     ON d.id = t.domain_id
 ORDER BY
     tc.id,
-    d.name,
+    d.display_order,
+    t.display_order,
     t.name";
 
 $result = $conn->query($sql);
@@ -102,7 +105,11 @@ Return to Main Menu
 
 <th>Card</th>
 
+<th>Domain ID</th>
+
 <th>Domain</th>
+
+<th>Description</th>
 
 <th>Topic ID</th>
 
@@ -126,7 +133,11 @@ Return to Main Menu
 </a>
 </td>
 
+<td><?= $row['domain_id'] ?></td>
+
 <td><?= htmlspecialchars($row['domain']) ?></td>
+
+<td><?= htmlspecialchars($row['domain_description']) ?></td>
 
 <td><?= $row['topic_id'] ?></td>
 
