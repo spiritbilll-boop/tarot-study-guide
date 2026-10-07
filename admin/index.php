@@ -46,6 +46,12 @@ Topics by Card
 </a>
 </p>
 
+<p>
+<a href="<?= APP_ROOT ?>/knowledge_graph/cards_by_topic.php">
+Cards by Topic
+</a>
+</p>
+
 <h2>System</h2>
 
 <p>User Management (coming soon)</p>
